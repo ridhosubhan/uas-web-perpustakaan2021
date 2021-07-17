@@ -16,44 +16,44 @@
 
         <div id="sidebar-menu">
             <ul>
-                <li class="menu-title">Main</li>
-
+                <li class="menu-title">Menu Utama</li>
                 <li>
-                    <a href="index.html" class="waves-effect active">
+                    <a href="<?= BASEPATH?>" class="waves-effect <?= $title == 'Dashboard' ? 'active' : ''; ?>">
                         <i class="mdi mdi-airplay"></i>
                         <span> Dashboard </span>
                     </a>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ion-android-storage"></i> <span> Buku & Rak </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Buku' || $title == 'Data Rak') echo 'active'; ?>"><i class="ion-android-storage"></i> <span> Buku & Rak </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="advanced-highlight.html"><i class="fa fa-book"></i> Data Buku</a></li>
-                        <li><a href="advanced-rating.html"><i class="mdi mdi-package"></i> Data Rak</a></li>
+                        <li class="waves-effect <?= $title == 'Data Buku' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>/views/buku"><i class="fa fa-book"></i> Data Buku</a></li>
+                        <li class="waves-effect <?= $title == 'Data Rak' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>/views/rak"><i class="mdi mdi-package"></i> Data Rak</a></li>
                     </ul>
                 </li>
-
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-secret"></i> <span> Petugas </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                    <ul class="list-unstyled">
-                        <li><a href="advanced-highlight.html"><i class="fa fa-group (alias)"></i>Data Petugas</a></li>
-                        <li><a href="advanced-rating.html"><i class="fa fa-user-plus"></i> Akun Petugas</a></li>
-                    </ul>
-                </li>
-
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-group"></i> <span> Anggota </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                    <ul class="list-unstyled">
-                        <li><a href="advanced-highlight.html"><i class="fa fa-group (alias)"></i>Data Anggota</a></li>
-                        <li><a href="advanced-rating.html"><i class="fa fa-user-plus"></i>Akun Anggota</a></li>
-                    </ul>
-                </li>
-
                 <li>
                     <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Pengembalian </span></a>
                 </li>
 
-                <li class="menu-title">Akun</li>
+                <li class="menu-title">Data Pengguna</li>
+                
+
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-secret"></i> <span> Petugas </span></a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-group"></i> <span> Anggota </span></a>
+                </li>
+
+                <li>
+                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-account-settings-variant"></i><span> Akun </span></a>
+                </li>
+
+                <li class="menu-title">Pengaturan</li>
+                <li>
+                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
+                </li>
                 <li>
                     <a href="calendar.html" class="waves-effect"><i class="mdi mdi-logout"></i><span> Logout </span></a>
                 </li>
