@@ -38,7 +38,8 @@
                     <div class="page-title-box">
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#" class="active">Buku & Rak</a></li>
+                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Buku dan Rak</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Buku</a></li>
                             </ol>
                         </div>
@@ -103,8 +104,8 @@
 
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
-                                    <table id="tech-companies-1" class="table  table-striped">
-                                        <thead>
+                                    <table id="tech-companies-1" class="table table-hover">
+                                        <thead class="text-white bg-primary">
                                         <tr>
                                             <th>No.</th>
                                             <th>Kode Buku</th>
@@ -126,7 +127,7 @@
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
-                                            <td><?= $no."." ?></td>
+                                            <td><b><?= $no."." ?></b></td>
                                             <td><?= $data['kode_buku'] ?></td>
                                             <td><?= $data['judul'] ?></td>
                                             <td><?= $data['penulis'] ?></td>
@@ -149,6 +150,26 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                
+                                <nav aria-label="Page navigation example" class="float-right">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#"><<</a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">>></a>
+                                        </li>
+                                    </ul>
+                                </nav>
 
                             </div>
 

@@ -18,7 +18,7 @@
             <ul>
                 <li class="menu-title">Menu Utama</li>
                 <li>
-                    <a href="<?= BASEPATH?>" class="waves-effect <?= $title == 'Dashboard' ? 'active' : ''; ?>">
+                    <a href="<?= BASEPATH ?>" class="waves-effect <?= $title == 'Dashboard' ? 'active' : ''; ?>">
                         <i class="mdi mdi-airplay"></i>
                         <span> Dashboard </span>
                     </a>
