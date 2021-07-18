@@ -79,12 +79,12 @@
 
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
-                                    <table id="tabel_buku" class="table table-hover" width="100%">
+                                    <table id="tabel_buku" class="table table-hover">
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Nama</th>
-                                            <th>Lokasi</th>
+                                            <th>Nama Rak</th>
+                                            <th>Lokasi Buku</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
@@ -97,24 +97,16 @@
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
-                                            <td><b><?= $no."." ?></b></td>
+                                            <td class="text-center"><b><?= $no."." ?></b></td>
                                             <td><?= $data['nama'] ?></td>
                                             <td><?= $data['lokasi'] ?></td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <a href="detail.php?buku=<?= $data['lokasi'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
-                                                            <i class="mdi mdi-account-card-details"></i></a>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <a href="edit.php?buku=<?= $data['lokasi'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
-                                                            <i class="mdi mdi-pencil-box"></i></a>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <a href="hapus.php?buku=<?= $data['lokasi'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
-                                                            <i class="mdi mdi-delete-forever"></i></a>
-                                                    </div>
-                                                </div>
+                                            <td class="text-center">
+                                                <a href="detail.php?buku=<?= $data['lokasi'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
+                                                    <i class="mdi mdi-account-card-details"></i> Detail</a>
+                                                <a href="edit.php?buku=<?= $data['lokasi'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
+                                                    <i class="mdi mdi-pencil-box"></i> Edit</a>
+                                                <a href="hapus.php?buku=<?= $data['lokasi'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
+                                                    <i class="mdi mdi-delete-forever"></i> Hapus</a>
                                             </td>
                                         </tr>
                                         <?php
@@ -139,27 +131,7 @@
 
 </div> <!-- content -->
 
-<!-- Required datatable js -->
-<script src="<?=BASEPATH?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Buttons examples -->
-<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/jszip.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/pdfmake.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/vfs_fonts.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.html5.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.print.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.colVis.min.js"></script>
-
-<!-- Responsive examples -->
-<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.responsive.min.js"></script>
-<script src="<?=BASEPATH?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
-
-<!-- Datatable init js -->
-<script src="<?=BASEPATH?>assets/pages/datatables.init.js"></script>
-
+<?php include '../../layouts/footer.php';?>
 <script>
     $(document).ready(function(){
         $('#tabel_buku').DataTable({
@@ -169,9 +141,24 @@
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             buttons: [
-                'csv', 'excel', 'pdf', 'print'
+                {
+                    extend: 'csv', 
+                    className: 'btn-primary',
+                    text: '<i class="mdi mdi-file-excel"></i> CSV',
+                },
+                { 
+                    extend: 'excel', 
+                    className: 'btn-primary',
+                    text: '<i class="mdi mdi-file-excel"></i> Excel', },
+                { 
+                    extend: 'pdf', 
+                    className: 'btn-primary',
+                    text: '<i class="mdi mdi-file-pdf"></i> Pdf', },
+                { 
+                    extend: 'print', 
+                    className: 'btn-primary',
+                    text: '<i class="mdi mdi-printer"></i> Print', },
             ]
         });
     });
 </script>
-<?php include '../../layouts/footer.php';?>
