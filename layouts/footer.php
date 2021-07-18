@@ -10,7 +10,7 @@
 
 
         <!-- jQuery  -->
-        <script src="<?= BASEPATH?>/assets/js/jquery.min.js"></script>
+        <!-- <script src="<?= BASEPATH?>/assets/js/jquery.min.js"></script> -->
         <script src="<?= BASEPATH?>/assets/js/popper.min.js"></script>
         <script src="<?= BASEPATH?>/assets/js/bootstrap.min.js"></script>
         <script src="<?= BASEPATH?>/assets/js/modernizr.min.js"></script>
@@ -25,6 +25,8 @@
         <script src="<?= BASEPATH?>/assets/plugins/skycons/skycons.min.js"></script>
         <script src="<?= BASEPATH?>/assets/plugins/raphael/raphael-min.js"></script>
         <script src="<?= BASEPATH?>/assets/plugins/morris/morris.min.js"></script>
+
+        <script src="<?= BASEPATH?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
         
         <script src="<?= BASEPATH?>/assets/pages/dashborad.js"></script>
 

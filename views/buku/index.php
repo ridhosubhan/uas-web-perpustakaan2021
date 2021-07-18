@@ -3,27 +3,8 @@
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     session_start();
+    $con = connect_db();
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title> <?=$title?> - Sistem Informasi Perpustakaan</title>
-        <meta content="Admin Dashboard" name="description" />
-        <meta content="Mannatthemes" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-        <link rel="shortcut icon" href="<?= BASEPATH?>/assets/images/favicon.ico">
-
-        <link href="<?= BASEPATH?>/assets/plugins/morris/morris.css" rel="stylesheet">
-
-        <link href="<?= BASEPATH?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= BASEPATH?>/assets/css/icons.css" rel="stylesheet" type="text/css">
-        <link href="<?= BASEPATH?>/assets/css/style.css" rel="stylesheet" type="text/css">
-
-    </head>
     
     <?php 
         include '../../layouts/header.php';
@@ -87,25 +68,19 @@
                                     unset($_SESSION['sukseshapus']);
                                 }
                             ?>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <a href="tambah.php" class="float-left btn btn-primary m-b-30 waves-effect waves-light">
+                            <div class="row m-b-20">
+                                <div class="col-sm-12">
+                                    <a href="tambah.php" class="float-left btn btn-primary m-b-10 waves-effect waves-light">
                                         <span><i class="fa fa-user-plus"></i>  Tambah Data</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="input-group float-right m-b-30">
-                                        <span class="input-group-prepend">
-                                        <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button> </span>
-                                        <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Cari Data">
-                                    </div>
-                                </div>
                             </div>
+                            
 
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
-                                    <table id="tech-companies-1" class="table table-hover">
-                                        <thead class="text-white bg-primary">
+                                    <table id="tabel_buku" class="table table-hover" width="100%">
+                                        <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
                                             <th>Kode Buku</th>
@@ -119,9 +94,8 @@
                                         </thead>
                                         <tbody>
                       
-                                        <?php 
-                                            $con = connect_db();
-                                            $query = "SELECT * FROM tb_buku";
+                                        <?php
+                                            $query = "SELECT * FROM tb_buku ORDER BY id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
@@ -135,12 +109,20 @@
                                             <td><?= $data['tahun_terbit'] ?></td>
                                             <td><?= $data['stok'] ?></td>
                                             <td>
-                                                <a href="detail.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
-                                                    <i class="mdi mdi-account-card-details"></i></a>
-                                                <a href="edit.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
-                                                    <i class="mdi mdi-pencil-box"></i></a>
-                                                <a href="hapus.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
-                                                    <i class="mdi mdi-delete-forever"></i></a>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <a href="detail.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
+                                                            <i class="mdi mdi-account-card-details"></i></a>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <a href="edit.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
+                                                            <i class="mdi mdi-pencil-box"></i></a>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <a href="hapus.php?buku=<?= $data['kode_buku'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
+                                                            <i class="mdi mdi-delete-forever"></i></a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php
@@ -150,26 +132,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                
-                                <nav aria-label="Page navigation example" class="float-right">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><<</a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">>></a>
-                                        </li>
-                                    </ul>
-                                </nav>
 
                             </div>
 
@@ -185,4 +147,39 @@
 
 </div> <!-- content -->
 
+<!-- Required datatable js -->
+<script src="<?=BASEPATH?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Buttons examples -->
+<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/jszip.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="<?=BASEPATH?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="<?=BASEPATH?>assets/pages/datatables.init.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#tabel_buku').DataTable({
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            // dom: 'Blfrtip',
+            dom:"<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5 text-center'B><'col-sm-12 col-md-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
 <?php include '../../layouts/footer.php';?>

@@ -1,3 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title> <?=$title?> - Sistem Informasi Perpustakaan</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="<?= BASEPATH?>/assets/images/favicon.ico">
+
+        <link href="<?= BASEPATH?>/assets/plugins/morris/morris.css" rel="stylesheet">
+
+        <!-- DataTables -->
+        <link href="<?= BASEPATH?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?= BASEPATH?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        
+        <!-- Responsive datatable examples -->
+        <link href="<?= BASEPATH?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        <link href="<?= BASEPATH?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= BASEPATH?>/assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="<?= BASEPATH?>/assets/css/style.css" rel="stylesheet" type="text/css">
+
+        <script src="<?= BASEPATH?>/assets/js/jquery.min.js"></script>
+    </head>
 
     <body class="fixed-left">
 
