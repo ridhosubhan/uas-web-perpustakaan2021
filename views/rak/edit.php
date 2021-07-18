@@ -38,7 +38,7 @@
             } else {
                 $query = "UPDATE tb_rak SET nama = '$nama', lokasi = '$lokasi' WHERE id = '$id'";
                 execute_query($con, $query);
-                $_SESSION["suksesedit"] = "Berhasil Mengubah Data Buku Dengan Kode : ".$kodebuku;
+                $_SESSION["suksesedit"] = "Berhasil Mengubah Data Rak";
                     echo "
                         <script>
                             window.location.href='index.php';

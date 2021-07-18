@@ -101,11 +101,11 @@
                                             <td><?= $data['nama'] ?></td>
                                             <td><?= $data['lokasi'] ?></td>
                                             <td class="text-center">
-                                                <a href="detail.php?buku=<?= $data['lokasi'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
+                                                <a href="detail.php?rak=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['lokasi'] ?>">
                                                     <i class="mdi mdi-account-card-details"></i> Detail</a>
-                                                <a href="edit.php?buku=<?= $data['lokasi'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
+                                                <a href="edit.php?rak=<?= $data['id'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['lokasi'] ?>">
                                                     <i class="mdi mdi-pencil-box"></i> Edit</a>
-                                                <a href="hapus.php?buku=<?= $data['lokasi'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
+                                                <a href="hapus.php?rak=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['lokasi'] ?>">
                                                     <i class="mdi mdi-delete-forever"></i> Hapus</a>
                                             </td>
                                         </tr>
