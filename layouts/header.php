@@ -24,6 +24,9 @@
         <link href="<?= BASEPATH?>/assets/css/icons.css" rel="stylesheet" type="text/css">
         <link href="<?= BASEPATH?>/assets/css/style.css" rel="stylesheet" type="text/css">
 
+        <!-- SELECT2 -->
+        <link href="<?= BASEPATH?>assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+
         <script src="<?= BASEPATH?>/assets/js/jquery.min.js"></script>
     </head>
 

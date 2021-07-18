@@ -32,6 +32,28 @@
 
         <!-- App js -->
         <script src="<?= BASEPATH?>/assets/js/app.js"></script>
+
+        <!-- Required datatable js -->
+        <script src="<?=BASEPATH?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Buttons examples -->
+        <script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/jszip.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/vfs_fonts.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/buttons.print.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+        <!-- Responsive examples -->
+        <script src="<?=BASEPATH?>assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="<?=BASEPATH?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+        <!-- Datatable init js -->
+        <script src="<?=BASEPATH?>assets/pages/datatables.init.js"></script>
+
         <script>
              /* BEGIN SVG WEATHER ICON */
              if (typeof Skycons !== 'undefined'){
