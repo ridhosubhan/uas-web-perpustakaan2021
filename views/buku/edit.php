@@ -128,7 +128,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="text-center">
-                                            <input type="text" size="100" name="label-gambar" id="label-gambar" value="<?= $data['sampul'] ?>">
+                                            <input type="hidden" size="100" name="label-gambar" id="label-gambar" value="<?= $data['sampul'] ?>">
                                             <img id="preview_gambar" src="<?=BASEPATH?>images/<?=$data['sampul']?>" class="img-thumbnail img-fluid rounded m-b-10" alt="...">
                                             <div class="custom-file col-sm-12">
                                                 <input type="file" name="_gambar" id="_gambar" class="custom-file-input">
@@ -202,11 +202,11 @@
                                         <div class="row">
                                             <div class="col-sm-12 float-right">
                                                 <div class="float-right">
-                                                    <button type="button" id="btn_reset" onClick="window.location.reload();" class="btn btn-danger">
-                                                        <i class="fa fa-refresh"></i> Reset
-                                                    </button>
                                                     <button type="submit" id="submit" name="simpan" value="simpan" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i> Edit
+                                                    </button>
+                                                    <button type="button" id="btn_reset" onClick="window.location.reload();" class="btn btn-secondary">
+                                                        <i class="fa fa-refresh"></i> Reset
                                                     </button>
                                             </div>
                                         </div>

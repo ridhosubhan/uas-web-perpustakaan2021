@@ -32,7 +32,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Pengembalian </span></a>
+                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Peminjaman Buku</span></a>
+                </li>
+                <li>
+                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Pengembalian Buku</span></a>
                 </li>
 
                 <li class="menu-title">Data Pengguna</li>
@@ -43,7 +46,7 @@
                 </li>
 
                 <li>
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-group"></i> <span> Anggota </span></a>
+                    <a href="<?= BASEPATH?>/views/anggota" class="waves-effect <?= $title == 'Data Anggota' ? 'active' : ''; ?>"><i class="fa fa-group"></i> <span> Anggota </span></a>
                 </li>
 
                 <li>

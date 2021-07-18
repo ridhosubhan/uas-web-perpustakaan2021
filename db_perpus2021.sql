@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2021 at 09:17 AM
+-- Generation Time: Jul 18, 2021 at 05:07 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -37,6 +37,13 @@ CREATE TABLE `tb_anggota` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_anggota`
+--
+
+INSERT INTO `tb_anggota` (`id`, `kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `id_user`) VALUES
+(9, 'ANG-0001', 'Jajang Maman', 'L', '08119901717', 'polo', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,7 @@ CREATE TABLE `tb_buku` (
   `id` int(11) NOT NULL,
   `kode_buku` varchar(100) NOT NULL,
   `judul` varchar(255) NOT NULL,
+  `sampul` varchar(255) NOT NULL,
   `penulis` varchar(255) NOT NULL,
   `penerbit` varchar(255) NOT NULL,
   `tahun_terbit` varchar(4) NOT NULL,
@@ -58,15 +66,9 @@ CREATE TABLE `tb_buku` (
 -- Dumping data for table `tb_buku`
 --
 
-INSERT INTO `tb_buku` (`id`, `kode_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `id_rak`) VALUES
-(1, 'BKU-0001', 'Cara Cepat Kaya', 'Jon Dodol', 'Pesugihan Printing', '1998', 100, 1),
-(2, 'BKU-0002', 'Tutorial Gak Ngapa Ngapain', 'Jihan Rahmi Ayu', 'Mager Printing', '2020', 90, 1),
-(3, 'BKU-0003', 'asdasd', 'kontol', 'tkontok', '0000', 10, 1),
-(4, 'BKU-0004', 'kontol', 'kontol', 'tkontok', '2131', 9090, 2),
-(5, 'BKU-0005', 'kontol', 'kontol', 'asdadda', '2131', 0, 2),
-(6, 'BKU-0006', 'Jon', 'asdadad', 'tkontok', '2131', 312313, 2),
-(7, 'BKU-0007', 'kontol', 'kontol', 'tkontok', '2131', 9090, 2),
-(9, 'BKU-0008', 'Sok', 'asdadad', 'PT. Ribut Anjing', '2009', 10, 1);
+INSERT INTO `tb_buku` (`id`, `kode_buku`, `judul`, `sampul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `id_rak`) VALUES
+(1, 'BKU-0001', 'Cara Cepat Kaya', 'james-sutton-dQ5G0h7sLno-unsplash.jpg', 'Jo', 'Pesugihan Printing', '1998', 100, 1),
+(2, 'BKU-0002', 'CARA MATI', 'WhatsApp Image 2021-07-16 at 21.53.13.jpeg', 'ASU', 'ASU JAYA', '2021', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,9 @@ CREATE TABLE `tb_rak` (
 
 INSERT INTO `tb_rak` (`id`, `nama`, `lokasi`) VALUES
 (1, 'Karya Ilmiah', 'A-1'),
-(2, 'Fiksi', 'A-2');
+(2, 'Fiksi', 'A-2'),
+(3, 'Religi Islami', 'B-12'),
+(4, 'Religi Kristen', 'B-11');
 
 -- --------------------------------------------------------
 
@@ -211,13 +215,13 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_buku`
 --
 ALTER TABLE `tb_buku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_peminjaman`
@@ -241,7 +245,7 @@ ALTER TABLE `tb_petugas`
 -- AUTO_INCREMENT for table `tb_rak`
 --
 ALTER TABLE `tb_rak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
@@ -252,12 +256,6 @@ ALTER TABLE `tb_user`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `tb_anggota`
---
-ALTER TABLE `tb_anggota`
-  ADD CONSTRAINT `fk_anggota_user` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id`);
 
 --
 -- Constraints for table `tb_buku`

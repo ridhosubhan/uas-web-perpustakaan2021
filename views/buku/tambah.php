@@ -106,11 +106,11 @@
                                         <div class="row">
                                             <div class="col-sm-12 float-right">
                                                 <div class="float-right">
-                                                    <button type="button" id="btn_reset" onClick="window.location.reload();" class="btn btn-danger">
-                                                        <i class="fa fa-refresh"></i> Reset
-                                                    </button>
                                                     <button type="submit" id="submit" name="simpan" value="simpan" class="btn btn-primary">
                                                         <i class="mdi mdi-content-save"></i> Simpan
+                                                    </button>
+                                                    <button type="button" id="btn_reset" onClick="window.location.reload();" class="btn btn-secondary">
+                                                        <i class="fa fa-refresh"></i> Reset
                                                     </button>
                                             </div>
                                         </div>
