@@ -106,17 +106,17 @@
                                             <td><?= $data['jenkel']=='L' ? 'Laki-Laki' : 'Perempuan'; ?></td>
                                             <td><?= $data['no_telp'] ?></td>
                                             <td><?= $data['alamat'] ?></td>
-                                            <td class="text-center">
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <a href="detail.php?anggota=<?= $data['kode_anggota'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_anggota'] ?>">
+                                            <td>
+                                                <div class="row text-center">
+                                                    <div class="col-sm-4">
+                                                        <a href="detail.php?anggota=<?= $data['kode_anggota'] ?>" class="btn btn-lg btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_anggota'] ?>">
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-4">
                                                         <a href="edit.php?anggota=<?= $data['kode_anggota'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_anggota'] ?>">
                                                             <i class="mdi mdi-pencil-box"></i></a>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-4">
                                                         <a href="hapus.php?anggota=<?= $data['kode_anggota'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_anggota'] ?>">
                                                             <i class="mdi mdi-delete-forever"></i></a>
                                                     </div>

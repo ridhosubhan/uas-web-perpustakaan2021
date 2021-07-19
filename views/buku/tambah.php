@@ -172,7 +172,7 @@
 
             // SELECT2
             $('._rakbuku').select2();
-            $(window).resize(function() {
+                $(window).resize(function() {
                     $('.select2').css('width', "100%");
                 });
         });

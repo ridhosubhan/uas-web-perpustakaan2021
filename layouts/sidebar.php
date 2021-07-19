@@ -25,32 +25,28 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Buku' || $title == 'Data Rak') echo 'active'; ?>"><i class="ion-android-storage"></i> <span> Buku & Rak </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                    <ul class="list-unstyled">
-                        <li class="waves-effect <?= $title == 'Data Buku' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>/views/buku"><i class="fa fa-book"></i> Data Buku</a></li>
-                        <li class="waves-effect <?= $title == 'Data Rak' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>/views/rak"><i class="mdi mdi-package"></i> Data Rak</a></li>
+                    <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Petugas' || $title == 'Data Anggota' || $title == 'Data Akun') echo 'active'; ?>"><i class="mdi mdi-view-dashboard"></i> <span> Master Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="list-unstyled">                       
+                        <li class="waves-effect"><a href="javascript:void(0);"><i class="fa fa-user-secret"></i> <span> Data Petugas</span></a></li>
+                        <li class="waves-effect <?= $title == 'Data Anggota' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/anggota"><i class="fa fa-group"></i> <span> Data Anggota </span></a></li>
+                        <li class="waves-effect"><a href="calendar.html"><i class="mdi mdi-account-settings-variant"></i><span> Data Akun </span></a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Peminjaman Buku</span></a>
-                </li>
-                <li>
-                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-clock"></i><span> Pengembalian Buku</span></a>
-                </li>
 
-                <li class="menu-title">Data Pengguna</li>
-                
-
-                <li>
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-secret"></i> <span> Petugas </span></a>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Buku' || $title == 'Data Rak') echo 'active'; ?>"><i class="ion-android-storage"></i> <span> Katalog Buku </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li class="waves-effect <?= $title == 'Data Buku' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/buku" class="waves-effect"><i class="fa fa-book"></i> Data Buku </a></li>
+                        <li class="waves-effect <?= $title == 'Data Rak' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/rak" class="waves-effect"><i class="mdi mdi-package"></i> Data Rak Buku </a></li>
+                    </ul>
                 </li>
 
-                <li>
-                    <a href="<?= BASEPATH?>/views/anggota" class="waves-effect <?= $title == 'Data Anggota' ? 'active' : ''; ?>"><i class="fa fa-group"></i> <span> Anggota </span></a>
-                </li>
-
-                <li>
-                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-account-settings-variant"></i><span> Akun </span></a>
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Peminjaman' || $title == 'Data Pengembalian') echo 'active'; ?>"><i class="fa fa-shopping-cart"></i> <span> Data Transaksi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li class="waves-effect <?= $title == 'Data Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="fa fa-calendar-o"></i> Data Peminjaman</a></li>
+                        <li class="waves-effect <?= $title == 'Data Pengembalian' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/pengembalian" class="waves-effect"><i class="fa fa-calendar"></i> Data Pengembalian</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title">Pengaturan</li>
