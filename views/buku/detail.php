@@ -24,7 +24,7 @@
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Buku dan Rak</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>views/buku" class="active">Data Buku</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Detail</a></li>
                             </ol>
@@ -41,7 +41,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3 text-center">
-                                    <img class="img-thumbnail img-fluid rounded" src="<?=BASEPATH?>/images/<?=$data['sampul']?>" width="200px">
+                                    <img class="img-thumbnail img-fluid rounded" src="<?=BASEPATH?>/images/<?=$data['sampul']?>">
                                 </div>
                                 <div class="col-sm-9">
                                     <form>

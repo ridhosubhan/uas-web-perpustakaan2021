@@ -1,24 +1,20 @@
 <?php 
-    $title = 'Data Anggota';
+    $title = 'Data Petugas';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
-    include 'controller.php'; 
     session_start();
     $con = connect_db();
 
     include '../../layouts/header.php';
 
-    //EDIT
     if (isset($_POST['simpan'])){
-        //ambil variabel dari tambah.php untuk divisi
-        $kodeanggota = $_GET['anggota'];
+        $idpetugas = $_GET['petugas'];
         $nama = $_POST['_nama'];
-        $jenkel = $_POST['_jenkel'];
+        $jabatan = $_POST['_jabatan'];
         $notelp = $_POST['_notelp'];
         $alamat = $_POST['_alamat'];
         
-        //cek jika kode divisi sudah digunakan pada row yang lain, maka kode tidak boleh sama
-        $query = "SELECT * from tb_anggota WHERE nama='$nama' AND jenkel='$jenkel' AND no_telp='$notelp' AND alamat='$alamat'";
+        $query = "SELECT * from tb_petugas WHERE nama='$nama' AND jabatan='$jabatan' AND no_telp='$notelp' AND alamat='$alamat'";
         $result = execute_query($con, $query);
         if(mysqli_num_rows($result) >0){
             echo "
@@ -28,9 +24,9 @@
                 </script>
                 ";
         } else {
-            $query = "UPDATE tb_anggota SET nama = '$nama', jenkel = '$jenkel', no_telp='$notelp', alamat='$alamat' WHERE kode_anggota = '$kodeanggota'";
+            $query = "UPDATE tb_petugas SET nama='$nama', jabatan='$jabatan', no_telp='$notelp', alamat='$alamat' WHERE id = '$idpetugas'";
             execute_query($con, $query);
-            $_SESSION["suksesedit"] = "Berhasil Mengubah Data Anggota";
+            $_SESSION["suksesedit"] = "Berhasil Mengubah Data Petugas";
                 echo "
                     <script>
                         window.location.href='index.php';
@@ -39,14 +35,13 @@
         }
     }
 //kondisi ketika klik tombol edit untuk membawa parameter divisiid dari form sebelumnya
-elseif (isset($_GET['anggota'])) {
+else if (isset($_GET['petugas'])) {
     $con = connect_db();
-    $kodeanggota = $_GET['anggota'];
-    $query = "SELECT * FROM tb_anggota WHERE kode_anggota = '$kodeanggota'";
+    $idpetugas = $_GET['petugas'];
+    $query = "SELECT * FROM tb_petugas WHERE id = '$idpetugas'";
     $result = execute_query($con, $query);
     $data = mysqli_fetch_array($result);
 ?>
-
     <div class="page-content-wrapper ">
 
         <div class="container-fluid">
@@ -56,13 +51,13 @@ elseif (isset($_GET['anggota'])) {
                     <div class="page-title-box">
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
+                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
-                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/buku" class="active">Data Anggota</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Edit Data Anggota</a></li>
+                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/petugas">Data Petugas</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Edit Data Petugas</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Edit Data Anggota <?=$data['kode_anggota']?> </h4>
+                        <h4 class="page-title">Edit Data Petugas</h4>
                     </div>
                 </div>
             </div>
@@ -72,26 +67,23 @@ elseif (isset($_GET['anggota'])) {
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                        <form name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
+                            <form name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label>Kode Anggota</label> 
-                                    <input name="_kodeanggota" id="_kodeanggota" type="text" value="<?=$data['kode_anggota']?>" class="form-control" placeholder="Kode Anggota" required readonly>
+                                    <label>Nama Petugas</label> 
+                                    <input name="_nama" id="_nama" type="text" value="<?=$data['nama']?>" class="form-control" placeholder="Ketik Nama Petugas" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama Anggota</label> 
-                                    <input name="_nama" id="_nama" type="text" value="<?=$data['nama']?>" class="form-control" placeholder="Ketik Nama Anggota" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Jenis Kelamin</label> 
-                                        <select class="form-control" name="_jenkel" id="_jenkel" required>
-                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                            <option value="L" <?= $data['jenkel']=='L' ? 'selected' : ''; ?>> Laki - Laki</option>   
-                                            <option value="P" <?= $data['jenkel']=='P' ? 'selected' : ''; ?>> Perempuan</option>   
+                                    <label>Jabatan</label> 
+                                        <select class="form-control select2" name="_jabatan" id="_jabatan" required>
+                                            <option value="" disabled selected>Pilih Jabatan</option>
+                                            <option value="Manager" <?= $data['jabatan']=='Manager' ? 'selected' : ''; ?>> Manager </option>   
+                                            <option value="Supervisor" <?= $data['jabatan']=='Supervisor' ? 'selected' : ''; ?>> Supervisor</option>   
+                                            <option value="Staff" <?= $data['jabatan']=='Staff' ? 'selected' : ''; ?>> Staff</option>   
                                         </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nomor Telepon</label> 
-                                    <input name="_notelp" id="_notelp" type="text" value="<?=$data['no_telp']?>" class="form-control" placeholder="Ketik Nomor Telepon" required>
+                                    <input name="_notelp" id="_notelp" type="text" value="<?=$data['no_telp']?>" class="form-control hanyaAngka" placeholder="Ketik Nomor Telepon" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat</label> 

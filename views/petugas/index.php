@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Data Anggota';
+    $title = 'Data Petugas';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     session_start();
@@ -21,10 +21,10 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Data Anggota</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Data Petugas</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Data Anggota</h4>
+                        <h4 class="page-title">Data Petugas</h4>
                     </div>
                 </div>
             </div>
@@ -83,10 +83,9 @@
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Kode Anggota</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>No. Telpon</th>
+                                            <th>Jabatan</th>
+                                            <th>Nomor Telpon</th>
                                             <th>Alamat</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -94,30 +93,29 @@
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT * FROM tb_anggota ORDER BY id DESC";
+                                            $query = "SELECT * FROM tb_petugas ORDER BY id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
-                                            <td><?= $data['kode_anggota'] ?></td>
                                             <td><?= $data['nama'] ?></td>
-                                            <td><?= $data['jenkel']=='L' ? 'Laki-Laki' : 'Perempuan'; ?></td>
+                                            <td><?= $data['jabatan'] ?></td>
                                             <td><?= $data['no_telp'] ?></td>
                                             <td><?= $data['alamat'] ?></td>
                                             <td>
                                                 <div class="row text-center">
                                                     <div class="col-sm-4">
-                                                        <a href="detail.php?anggota=<?= $data['kode_anggota'] ?>" class="btn btn-lg btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_anggota'] ?>">
+                                                        <a href="detail.php?petugas=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['nama'] ?>">
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <a href="edit.php?anggota=<?= $data['kode_anggota'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_anggota'] ?>">
+                                                        <a href="edit.php?petugas=<?= $data['id'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['nama'] ?>">
                                                             <i class="mdi mdi-pencil-box"></i></a>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <a href="hapus.php?anggota=<?= $data['kode_anggota'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_anggota'] ?>">
+                                                        <a href="hapus.php?petugas=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['nama'] ?>">
                                                             <i class="mdi mdi-delete-forever"></i></a>
                                                     </div>
                                                 </div>

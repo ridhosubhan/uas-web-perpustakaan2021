@@ -73,12 +73,24 @@
                 icons.play();
             };
 
-        // scroll
+        //UNTUK EVENT HANYA KETIK ANGKA
+        $('.hanyaAngka').on("keypress keyup blur",function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+            
+        $(document).ready(function() {   
+            // scroll
+            $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#cecece",boxzoom:true});
+            $("#boxscroll2").niceScroll({cursorborder:"",cursorcolor:"#cecece",boxzoom:true}); 
 
-        $(document).ready(function() {
-        
-        $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#cecece",boxzoom:true});
-        $("#boxscroll2").niceScroll({cursorborder:"",cursorcolor:"#cecece",boxzoom:true}); 
+            // JALANIN SELECT2
+            $('.select2').select2();
+            $(window).resize(function() {
+                $('.select2').css('width', "100%");
+            });
         
         });
         </script>

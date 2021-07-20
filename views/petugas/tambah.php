@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Data Anggota';
+    $title = 'Data Petugas';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     include 'controller.php'; 
@@ -19,12 +19,12 @@
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>">Menu Utama</a></li>
-                                <li class="breadcrumb-item"><a href="#">Master Data</a></li>
-                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/anggota" class="active">Data Anggota</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Tambah Data Anggota</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
+                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/petugas">Data Petugas</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Tambah Data Petugas</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Tambah Data Anggota </h4>
+                        <h4 class="page-title">Tambah Data Petugas </h4>
                     </div>
                 </div>
             </div>
@@ -34,22 +34,19 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <?=tambah()?>
+                            <?= tambah();?>
                             <form name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label>Kode Anggota</label> 
-                                    <input name="_kodeanggota" id="_kodeanggota" type="text" value="<?=kodeanggota();?>" class="form-control" placeholder="Kode Anggota" required readonly>
+                                    <label>Nama Petugas</label> 
+                                    <input name="_nama" id="_nama" type="text" class="form-control" placeholder="Ketik Nama Petugas" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama Anggota</label> 
-                                    <input name="_nama" id="_nama" type="text" class="form-control" placeholder="Ketik Nama Anggota" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Jenis Kelamin</label> 
-                                        <select class="form-control" name="_jenkel" id="_jenkel" required>
-                                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                            <option value="L"> Laki - Laki</option>   
-                                            <option value="P"> Perempuan</option>   
+                                    <label>Jabatan</label> 
+                                        <select class="form-control select2" name="_jabatan" id="_jabatan" required>
+                                            <option value="" disabled selected>Pilih Jabatan</option>
+                                            <option value="Manager"> Manager </option>   
+                                            <option value="Supervisor"> Supervisor</option>   
+                                            <option value="Staff"> Staff</option>   
                                         </select>
                                 </div>
                                 <div class="form-group">
@@ -82,24 +79,3 @@
 </div> <!-- content -->
 
 <?php include '../../layouts/footer.php';?>
-<script>
-    //UNTUK EVENT HANYA KETIK ANGKA
-    $('.hanyaAngka').on("keypress keyup blur",function (event) {
-        $(this).val($(this).val().replace(/[^\d].+/, ""));
-        if ((event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
-
-    $(document).ready(function() {
-        //Set gambar default
-        $('#preview_gambar').attr('src', "https://ride4lessltd.com//assets/images/no_image.png");
-
-        // SELECT2
-        $('._rakbuku').select2();
-        $(window).resize(function() {
-                $('.select2').css('width', "100%");
-            });
-    }); 
-    
-</script>

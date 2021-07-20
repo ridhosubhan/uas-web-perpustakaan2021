@@ -24,11 +24,12 @@
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/buku" class="active">Data Anggota</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Detail Anggota</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Detail Buku <?=$data['nama']?> </h4>
+                        <h4 class="page-title">Detail Anggota <?=$data['kode_anggota']?> </h4>
                     </div>
                 </div>
             </div>

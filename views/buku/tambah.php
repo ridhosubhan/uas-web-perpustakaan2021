@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Tambah Data Buku';
+    $title = 'Data Buku';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     include 'controller.php'; 
@@ -19,7 +19,7 @@
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Buku dan Rak</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Master Data</a></li>
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>/views/buku" class="active">Data Buku</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Tambah Data Buku</a></li>
                             </ol>
@@ -89,7 +89,7 @@
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-sm-3 col-form-label">Rak Buku</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control _rakbuku" style="width: 100%" name="_rakbuku" required>
+                                                <select class="form-control select2" name="_rakbuku" required>
                                                     <option value="" disabled selected></option>
                                                     <?php
                                                         $query = "SELECT * FROM tb_rak";
@@ -131,14 +131,6 @@
 
 <?php include '../../layouts/footer.php';?>
 <script>
-    //UNTUK EVENT HANYA KETIK ANGKA
-    $('.hanyaAngka').on("keypress keyup blur",function (event) {
-        $(this).val($(this).val().replace(/[^\d].+/, ""));
-        if ((event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
-
     //Preview Gambar
     function readURL(input) {
             //Get Data Gambar
@@ -169,12 +161,6 @@
         $(document).ready(function() {
             //Set gambar default
             $('#preview_gambar').attr('src', "https://ride4lessltd.com//assets/images/no_image.png");
-
-            // SELECT2
-            $('._rakbuku').select2();
-                $(window).resize(function() {
-                    $('.select2').css('width', "100%");
-                });
         });
     
 </script>
