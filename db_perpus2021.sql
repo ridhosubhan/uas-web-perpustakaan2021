@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2021 at 05:07 PM
+-- Generation Time: Jul 20, 2021 at 09:41 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -34,15 +34,16 @@ CREATE TABLE `tb_anggota` (
   `jenkel` varchar(1) NOT NULL,
   `no_telp` varchar(13) NOT NULL,
   `alamat` text NOT NULL,
-  `id_user` int(11) NOT NULL
+  `status_akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_anggota`
 --
 
-INSERT INTO `tb_anggota` (`id`, `kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `id_user`) VALUES
-(9, 'ANG-0001', 'Jajang Maman', 'L', '08119901717', 'polo', 0);
+INSERT INTO `tb_anggota` (`id`, `kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `status_akun`) VALUES
+(9, 'ANG-0001', 'Jajang Maman', 'L', '08119901717', 'polo', 0),
+(11, 'ANG-0002', 'Danila', 'P', '08119901717', 'adsdasdas', 0);
 
 -- --------------------------------------------------------
 
@@ -112,8 +113,16 @@ CREATE TABLE `tb_petugas` (
   `jabatan` varchar(50) NOT NULL,
   `no_telp` varchar(13) NOT NULL,
   `alamat` text NOT NULL,
-  `id_user` int(11) NOT NULL
+  `status_akun` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_petugas`
+--
+
+INSERT INTO `tb_petugas` (`id`, `nama`, `jabatan`, `no_telp`, `alamat`, `status_akun`) VALUES
+(3, 'Jang Danil', 'Supervisor', '08119901717', 'Jalan Sesama', 1),
+(4, 'Jihan Rahmi Ayu', 'Manager', '08119901717', 'Dimana aja bang', 0);
 
 -- --------------------------------------------------------
 
@@ -147,8 +156,16 @@ CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `role` varchar(100) NOT NULL
+  `role` varchar(100) NOT NULL,
+  `relasi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`id`, `username`, `password`, `role`, `relasi`) VALUES
+(7, 'admin', 'polopolo', 'Admin', 3);
 
 --
 -- Indexes for dumped tables
@@ -160,7 +177,7 @@ CREATE TABLE `tb_user` (
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kode_anggota` (`kode_anggota`),
-  ADD KEY `fk_anggota_user` (`id_user`);
+  ADD KEY `fk_anggota_user` (`status_akun`);
 
 --
 -- Indexes for table `tb_buku`
@@ -193,7 +210,7 @@ ALTER TABLE `tb_pengembalian`
 --
 ALTER TABLE `tb_petugas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_petugas_user` (`id_user`);
+  ADD KEY `fk_petugas_user` (`status_akun`);
 
 --
 -- Indexes for table `tb_rak`
@@ -215,7 +232,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_buku`
@@ -239,7 +256,7 @@ ALTER TABLE `tb_pengembalian`
 -- AUTO_INCREMENT for table `tb_petugas`
 --
 ALTER TABLE `tb_petugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_rak`
@@ -251,7 +268,7 @@ ALTER TABLE `tb_rak`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -278,12 +295,6 @@ ALTER TABLE `tb_pengembalian`
   ADD CONSTRAINT `fk_pengembalian_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `tb_anggota` (`id`),
   ADD CONSTRAINT `fk_pengembalian_buku` FOREIGN KEY (`id_buku`) REFERENCES `tb_buku` (`id`),
   ADD CONSTRAINT `fk_pengembalian_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id`);
-
---
--- Constraints for table `tb_petugas`
---
-ALTER TABLE `tb_petugas`
-  ADD CONSTRAINT `fk_petugas_user` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
