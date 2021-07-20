@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Data Buku';
+    $title = 'Data Anggota';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     session_start();
