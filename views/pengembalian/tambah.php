@@ -4,6 +4,7 @@
     include '../../konfigurasi/function.php'; 
     include 'controller.php'; 
     cek_session();
+    data_akun();
     $con = connect_db();
 
     include '../../layouts/header.php';
@@ -36,58 +37,59 @@
                         <div class="card-body">
                             <?= tambah();?>
                             <form name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label>Tanggal Pengembalian</label> 
-                                    <input name="_tanggal_pengembalian" id="_tanggal_pengembalian" type="date" class="form-control" placeholder="Pilih Tanggal Pengembalian" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Denda (Rp.)</label>  
-                                    <input name="_denda" id="_denda" type="number" class="form-control" placeholder="Masukkan Jumlah Denda" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Judul Buku</label> 
-                                        <select class="form-control select2" name="_id_buku" id="_id_buku">
-                                            <option value="" disabled selected>Pilih Judul Buku</option>
-                                            <?php
-                                            $query = "SELECT * FROM tb_buku";
-                                            $result = execute_query($con, $query);
-                                            while($id_buku = mysqli_fetch_array($result)) {
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Judul Buku</label> 
+                                            <select class="form-control select2" name="_id_peminjam" id="_id_peminjam" required>
+                                                <option value="" disabled selected>Pilih Judul Buku</option>
+                                                <?php
+                                                    $query = "SELECT tb_peminjaman.id as id_peminjaman, tb_peminjaman.*, tb_buku.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id";
+                                                    $result = execute_query($con, $query);
+                                                    while($id_buku = mysqli_fetch_array($result)) {
                                                 ?>
-                                                <option value="<?= $id_buku['id'] ?>"><?= $id_buku['judul'] ?></option> 
+                                                     <option value="<?= $id_buku['id_peminjaman'] ?>"><?= $id_buku['judul'] ?></option> 
                                                 <?php 
-                                            }
-                                            ?>
-                                        </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nama Anggota</label> 
-                                        <select class="form-control select2" name="_id_anggota" id="_id_anggota">
-                                            <option value="" disabled selected>Pilih Nama Anggota</option>
-                                            <?php
-                                            $query = "SELECT * FROM tb_anggota";
-                                            $result = execute_query($con, $query);
-                                            while($id_anggota = mysqli_fetch_array($result)) {
+                                                    }
                                                 ?>
-                                                <option value="<?= $id_anggota['id'] ?>"><?= $id_anggota['nama'] ?></option> 
-                                                <?php 
-                                            }
-                                            ?>
-                                        </select>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Nama Peminjam</label> 
+                                            <input type="text" id="_idPetugas" name="_idPetugas" class="form-control"> <!-- ID BUKU -->
+                                            <input type="text" id="_idBuku" name="_idBuku" class="form-control"> <!-- ID BUKU -->
+                                            <input type="text" id="_namapeminjam" class="form-control"> <!-- NAMA PEMINJAM -->
+                                            <input type="text" id="_id_anggota" name="_id_anggota" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Tanggal Peminjaman</label> 
+                                            <input readonly type="date" id="_tanggal_pinjam" class="form-control" placeholder="Pilih Tanggal Pengembalian" value="<?=$id_buku['tanggal_pinjam']?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Tanggal Pengembalian</label> 
+                                            <input name="_tanggal_pengembalian" id="_tanggal_pengembalian" type="date" class="form-control" placeholder="Pilih Tanggal Pengembalian" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Denda (Rp.)</label> 
+                                            <input name="_denda" id="_denda" value="0" class="form-control hanyaAngka" placeholder="Masukkan Jumlah Denda" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label>Nama Petugas</label> 
-                                        <select class="form-control select2" name="_id_petugas" id="_id_petugas">
-                                            <option value="" disabled selected>Pilih Nama Anggota</option>
-                                            <?php
-                                            $query = "SELECT * FROM tb_petugas";
-                                            $result = execute_query($con, $query);
-                                            while($id_petugas = mysqli_fetch_array($result)) {
-                                                ?>
-                                                <option value="<?= $id_petugas['id'] ?>"><?= $id_petugas['nama'] ?></option> 
-                                                <?php 
-                                            }
-                                            ?>
-                                        </select>
+                                    <input type="text" class="form-control" value="<?=$profile_petugas['nama']?>" readonly required>
                                 </div>
                                 <div class="form-group float-right">
                                     <button type="submit" id="submit" name="simpan" value="simpan" class="btn btn-primary">
@@ -112,25 +114,32 @@
 
 <?php include '../../layouts/footer.php';?>
 <script>
-    $(document).ready(function(){
-        $('._dataAnggota').hide();
-        $('._dataPetugas').hide();
-        $('._rolePetugas').hide();
-        $('._roleAnggota').hide();
+    $('#_id_peminjam').change(function() {
+        var pinjam = $(this).children("option:selected").val();
+        $.ajax({
+            type: "POST",
+            url: 'search_ajax.php',
+            data: $(this).serialize(),
+            success: function(response){
+                var jsonData = JSON.parse(response);
+                console.log(jsonData);
+                $('#_idPetugas').val(jsonData.success.id_petugas);
+                $('#_idBuku').val(jsonData.success.id_buku);
+                $('#_id_anggota').val(jsonData.success.id_anggota);
+                $('#_namapeminjam').val(jsonData.success.nama);
+                $('#_tanggal_pinjam').val(jsonData.success.tanggal_pinjam);
+            }
+       });
     });
 
-    $('#_filter').on('change', function () {
-        if(this.value==1){
-            $('._dataAnggota').hide();
-            $('._roleAnggota').hide();
-            $('._dataPetugas').show(); 
-            $('._rolePetugas').show();
-        }
-        else if(this.value==2){
-            $('._dataPetugas').hide(); 
-            $('._rolePetugas').hide();
-            $('._dataAnggota').show();
-            $('._roleAnggota').show();
-        }
+    const diffDays = (date, otherDate) => Math.ceil(Math.abs(date - otherDate) / (1000 * 60 * 60 * 24));
+    $('#_tanggal_pengembalian').change(function() {
+        var pinjam = $('#_tanggal_pinjam').val();
+        var kembali = $(this).val();
+        var hasil = diffDays(new Date(kembali), new Date(pinjam));
+        
+        if(hasil>7){
+            alert('Pengambalian Telat');
+        }   
     });
 </script>

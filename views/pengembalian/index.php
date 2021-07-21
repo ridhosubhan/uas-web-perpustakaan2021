@@ -83,29 +83,36 @@
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
+                                            <th>Judul Buku</th>
+                                            <th>Tanggal Peminjaman</th>
                                             <th>Tanggal Pengembalian</th>
-                                            <th>Denda (Rp.)</th>
-                                            <th>Id Buku</th>
-                                            <th>Id Anggota</th>
-                                            <th>Id Petugas</th>
+                                            <th>Denda</th>
+                                            <th>Nama Peminjam</th>
+                                            <th>Petugas</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT * FROM tb_pengembalian ORDER BY id DESC";
+                                            $query = "SELECT tb_buku.*, tb_peminjaman.*, tb_pengembalian.*, tb_petugas.nama as namapetugas, tb_anggota.nama as namaanggota FROM tb_pengembalian 
+                                            INNER JOIN tb_buku ON tb_buku.id = tb_pengembalian.id_buku 
+                                            INNER JOIN tb_peminjaman ON tb_peminjaman.id_buku = tb_pengembalian.id_buku 
+                                            INNER JOIN tb_petugas ON tb_pengembalian.id_petugas = tb_petugas.id 
+                                            INNER JOIN tb_anggota ON tb_pengembalian.id_anggota = tb_anggota.id 
+                                            ORDER BY tb_pengembalian.id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
-                                            <td><?= $data['tanggal_pengembalian'] ?></td>
+                                            <td><?= $data['judul'] ?></td>
+                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_pinjam']) ) ?></td>
+                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_kembali']) ) ?></td>
                                             <td><?= $data['denda'] ?></td>
-                                            <td><?= $data['id_buku'] ?></td>
-                                            <td><?= $data['id_anggota'] ?></td>
-                                            <td><?= $data['id_petugas'] ?></td>
+                                            <td><?= $data['namaanggota'] ?></td>
+                                            <td><?= $data['namapetugas'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm-4">

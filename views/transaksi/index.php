@@ -1,9 +1,10 @@
 <?php 
-    $title = 'Data Peminjaman';
+    $title = 'Transaksi Saya';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     cek_session();
     $con = connect_db();
+    data_akun();
 ?>
 <?php 
         include '../../layouts/header.php';
@@ -20,10 +21,10 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Transaksi</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Data Peminjam Buku</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Transaksi Saya</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Data Peminjam Buku</h4>
+                        <h4 class="page-title">Data Transaksi Saya</h4>
                     </div>
                 </div>
             </div>
@@ -33,66 +34,53 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <!-- Alert buat notifikasi berhasil hapus -->
-                            <?php
-                                if (isset($_SESSION["suksestambah"])){
-                                    echo "
-                                    <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                        <strong>".$_SESSION['suksestambah']."</strong> <br>".$_SESSION["suksesmohon"]."
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>
-                                    ";
-                                    unset($_SESSION['suksestambah']);
-                                    unset($_SESSION['suksesmohon']);
-                                }
-                            ?>
-
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
                                     <table id="tabel_buku" class="table table-hover">
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Cover</th>
                                             <th>Judul Buku</th>
-                                            <th>Penulis</th>
-                                            <th>Stok</th>
-                                            <th>Peminjam</th>
+                                            <th>Tanggal Peminjaman</th>
+                                            <th>Tanggal Pengembalian</th>
                                             <th>Status</th>
-                                            <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT tb_peminjaman.id as kode,tb_buku.id as kodebuku, tb_peminjaman.*, tb_buku.*, tb_anggota.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id INNER JOIN tb_anggota ON tb_peminjaman.id_anggota=tb_anggota.id WHERE tb_peminjaman.id_petugas=0 ORDER BY tb_peminjaman.id DESC";
+                                            $idanggota = $profile_anggota['id'];
+                                            $query = "SELECT tb_peminjaman.*, tb_buku.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id WHERE tb_peminjaman.id_anggota ='$idanggota' ORDER BY tb_peminjaman.id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
-                                            <td><img class="img-thumbnail img-fluid rounded" width="180px" src="<?=BASEPATH?>/images/<?=$data['sampul']?>"></td>
                                             <td><?= $data['judul'] ?></td>
-                                            <td><?= $data['penulis'] ?></td>
-                                            <td><?= $data['stok'] ?></td>
-                                            <td><?= $data['nama'] ?></td>
-                                            <td>
-                                                <?php if($data['id_petugas']==0) : ?>
+                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_pinjam']) ) ?></td>
+                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_kembali']) ) ?></td>
+                                            <!-- //TAMPILKAN STATUS PEMINJAMAN -->
+                                            <?php 
+                                                $conn = connect_db();
+                                                $queri = "SELECT * FROM tb_pengembalian WHERE id_anggota='$idanggota'";
+                                                $results = execute_query($conn, $queri);
+                                                $data_pinjam = mysqli_fetch_assoc($results);
+                                            ?>
+                                            <td class="text-center">
+                                                <?php if($data_pinjam['id_anggota']==0) : ?>
                                                     <h5>
-                                                        <span class="text-white badge badge-warning">Waiting Approval</span>
+                                                        <span class="text-white badge badge-danger">Belum Dikembalikan</span>
                                                     </h5>
-                                                <?php elseif ($data['id_petugas']!=0) : ?>  
-                                                        <h5>
-                                                            <span class="badge badge-success">Approved</span>
-                                                        </h5>
+                                                <?php elseif ($data['denda']>0) : ?>
+                                                    <h5>
+                                                        <span class="badge badge-warning">Telat Mengambalikan</span>
+                                                    </h5>  
+                                                <?php elseif ($data_pinjam['id_anggota']!=1) : ?>  
+                                                    <h5>
+                                                        <span class="badge badge-success">Dikembalikan</span>
+                                                    </h5>
                                                 <?php endif; ?>  
-                                            </td>
-                                            <td>
-                                                <a href="proses.php?id=<?= $data['kode'] ?>&buku=<?= $data['kodebuku'] ?>" onclick="return confirm('Approve Peminjaman Buku?')" class="btn btn-info waves-effect waves-light">
-                                                    <i class="fa fa-check-square"></i> Proses</a>
                                             </td>
                                         </tr>
                                         <?php

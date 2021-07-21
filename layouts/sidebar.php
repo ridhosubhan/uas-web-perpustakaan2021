@@ -48,7 +48,7 @@
                         <ul class="list-unstyled">
                             <?php if(not_admin()) : ?>
                                 <li class="<?= $title == 'Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="mdi mdi-book-open"></i> Peminjaman</a></li>
-                                <li class="<?= $title == 'Transaksi Saya' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="fa fa-opencart"></i> Transaksi Saya</a></li>
+                                <li class="<?= $title == 'Transaksi Saya' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/transaksi" class="waves-effect"><i class="fa fa-opencart"></i> Transaksi Saya</a></li>
                             <?php endif; ?>    
                             <?php if(is_admin()) : ?>
                                 <li class="<?= $title == 'Data Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/datapeminjaman" class="waves-effect"><i class="fa fa-calendar-o"></i> Data Peminjaman</a></li>

@@ -3,32 +3,39 @@
 function tambah(){
     $con = connect_db();
     if(isset($_POST['simpan'])){
+        $id_peminjam = $_POST['_id_peminjam'];
+
         $tgl_pengembalian = $_POST['_tanggal_pengembalian'];
         $denda = $_POST['_denda'];
-        $id_buku = $_POST['_id_buku'];
+        $id_buku = $_POST['_idBuku'];
         $id_anggota = $_POST['_id_anggota'];
-        $id_petugas = $_POST['_id_petugas'];
+        $id_petugas = $_POST['_idPetugas'];;
 
-        $query = "SELECT * from tb_pengembalian WHERE id_buku='$id_buku'";
+        $query = "SELECT * from tb_peminjaman WHERE id='$id_peminjam'";
         $result = execute_query($con, $query);
+        //DELETE table peminjaman
         if(mysqli_num_rows($result) > 0){
-            echo "
-                <script>
-                    window.location.href='index.php';
-                    alert('Buku Sudah Dipinjam');
-                </script>";
-        } else {
-            $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
-            $result = execute_query($con, $queri);
-            if (mysqli_affected_rows($con) !=0){
-                $_SESSION["suksestambah"] = "Berhasil Menambah Data";
-                echo "
-                    <script>
-                        window.location.href='index.php';
-                    </script>
-                ";;
-            }
-        }
+            $queris = "DELETE FROM tb_peminjaman WHERE id='$id_peminjam'";
+            $results = execute_query($con, $queris);
+            //UPDATE STOK table buku
+            if(mysqli_affected_rows($con) > 0){
+                $kueri = "UPDATE tb_buku SET stok = stok+1 WHERE id='$id_buku'";
+                $hasil = execute_query($con, $kueri);
+                if(mysqli_num_rows($hasil) > 0){
+                    //INSERT tb pengembalian
+                    $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
+                    $result = execute_query($con, $queri);
+                    if (mysqli_affected_rows($con) >0){
+                        $_SESSION["suksestambah"] = "Berhasil Memproses Data Pengembalian";
+                        echo "
+                            <script>
+                                window.location.href='index.php';
+                            </script>
+                        ";
+                    }
+                }
+            }       
+        } 
     }
 }
 
