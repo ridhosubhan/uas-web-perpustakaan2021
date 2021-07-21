@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Peminjaman';
+    $title = 'Data Pengembalian';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     include 'controller.php'; 
@@ -21,10 +21,10 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Transaksi</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Data Peminjaman</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Data Pengembalian</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Data Peminjaman</h4>
+                        <h4 class="page-title">Data Pengembalian</h4>
                     </div>
                 </div>
             </div>
@@ -83,8 +83,8 @@
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Tanggal Peminjaman</th>
                                             <th>Tanggal Pengembalian</th>
+                                            <th>Denda (Rp.)</th>
                                             <th>Id Buku</th>
                                             <th>Id Anggota</th>
                                             <th>Id Petugas</th>
@@ -94,26 +94,26 @@
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT * FROM tb_peminjaman ORDER BY id DESC";
+                                            $query = "SELECT * FROM tb_pengembalian ORDER BY id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
-                                            <td><?= $data['tanggal_pinjam'] ?></td>
-                                            <td><?= $data['tanggal_kembali'] ?></td>
+                                            <td><?= $data['tanggal_pengembalian'] ?></td>
+                                            <td><?= $data['denda'] ?></td>
                                             <td><?= $data['id_buku'] ?></td>
                                             <td><?= $data['id_anggota'] ?></td>
                                             <td><?= $data['id_petugas'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <a href="detail.php?peminjaman=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['id'] ?>">
+                                                        <a href="detail.php?pengembalian=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['id'] ?>">
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <a href="hapus.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['id'] ?>">
+                                                        <a href="hapus.php?pengembalian=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['id'] ?>">
                                                             <i class="mdi mdi-delete-forever"></i></a>
                                                     </div>
                                                 </div>
