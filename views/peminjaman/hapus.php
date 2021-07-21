@@ -15,7 +15,7 @@
             $query = "DELETE FROM tb_peminjaman WHERE id='$idpeminjam'";
             execute_query($con, $query);
             if(mysqli_affected_rows($con)>0){
-                $_SESSION["sukseshapus"] = "Berhasil Menghapus Data Petugas";
+                $_SESSION["sukseshapus"] = "Berhasil Menghapus Data Peminjaman";
                 header ("location: index.php");
             }else{
                 echo "Data Gagal Dihapus";
