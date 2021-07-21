@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Data Peminjaman';
+    $title = 'Peminjaman';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     include 'controller.php'; 

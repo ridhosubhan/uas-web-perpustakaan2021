@@ -1,8 +1,13 @@
 <?php 
     $title = 'Dashboard';
     include 'konfigurasi/config.php';
-    include 'layouts/header.php';
     include 'konfigurasi/function.php'; 
+    // session_start();
+    cek_session();
+?>
+
+<?php 
+    include 'layouts/header.php';
 ?>
 
 <div class="page-content-wrapper ">
@@ -18,6 +23,8 @@
                         </ol>
                     </div>
                     <h4 class="page-title">Dashboard</h4>
+                                                             
+                    <?php print_r($_SESSION);?>
                 </div>
             </div>
         </div>
@@ -38,7 +45,7 @@
                             <div class="col-6 align-self-center text-center">
                                 <div class="m-l-10">
                                     <h5 class="mt-0 round-inner">$18090</h5>
-                                    <p class="mb-0 text-muted">Visits Today</p>                                                                 
+                                    <p class="mb-0 text-muted">Visits Today</p>                                                                                       
                                 </div>
                             </div>
                             <div class="col-3 align-self-end align-self-center">

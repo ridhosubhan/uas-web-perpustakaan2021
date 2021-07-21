@@ -22,8 +22,8 @@
         }
     }
 
-    function is_admin(){
-        if($_SESSION['role']!='ADMIN'){
+    function not_admin(){
+        if($_SESSION['isRole']=='Anggota'){
             return false;
         }
         return true;

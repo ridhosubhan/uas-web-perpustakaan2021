@@ -34,6 +34,9 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
+                            <?php
+                                print_r($_SESSION);
+                            ?>
                             <!-- Alert buat notifikasi berhasil hapus -->
                             <?php
                                 if (isset($_SESSION["suksestambah"])){

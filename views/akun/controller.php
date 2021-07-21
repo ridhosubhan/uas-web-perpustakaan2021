@@ -2,16 +2,16 @@
 
 function tambah(){
     $con = connect_db();
-    $options = [
-        'cost' => 10,
-    ];
+    // $options = [
+    //     'cost' => 10,
+    // ];
     
     if(isset($_POST['simpan'])){
         $id_petugas = $_POST['_petugas'];
         $id_anggota = $_POST['_anggota'];
 
         $username = $_POST['_username'];
-        $password = password_hash($_POST['_password'],PASSWORD_DEFAULT,$options);
+        $password = password_hash($_POST['_password'],PASSWORD_DEFAULT);
         $role = $_POST['_role'];
 
         // KALO YANG DIINPUT DATA PETUGAS
