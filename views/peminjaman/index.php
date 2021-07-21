@@ -113,10 +113,6 @@
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <a href="edit.php?peminjaman=<?= $data['id'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['id'] ?>">
-                                                            <i class="mdi mdi-pencil-box"></i></a>
-                                                    </div>
-                                                    <div class="col-sm-4">
                                                         <a href="hapus.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['id'] ?>">
                                                             <i class="mdi mdi-delete-forever"></i></a>
                                                     </div>
