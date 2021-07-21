@@ -2,7 +2,7 @@
     $title = 'Data Rak';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
-    session_start();
+    cek_session();
     $con = connect_db();
 
     include '../../layouts/header.php';

@@ -1,3 +1,4 @@
+<?php data_akun();?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -137,12 +138,12 @@
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
                                         <div class="dropdown-item noti-title">
-                                            <h5>Welcome</h5>
+                                            <h5><?= $_SESSION['isRole']=='Anggota' ? $profile_anggota['nama']: $profile_petugas['nama']; ?></h5>
                                         </div>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
+                                        <a class="dropdown-item" href="<?= BASEPATH?>profile"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                                        <a class="dropdown-item" href="<?= BASEPATH?>setting"><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                        <a class="dropdown-item" href="<?= BASEPATH?>logout.php"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                                     </div>
                                 </li>
 

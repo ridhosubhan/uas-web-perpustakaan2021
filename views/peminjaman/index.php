@@ -2,8 +2,7 @@
     $title = 'Peminjaman';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
-    include 'controller.php'; 
-    session_start();
+    cek_session();
     $con = connect_db();
 ?>
 <?php 
@@ -24,7 +23,7 @@
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Peminjaman</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Data Peminjaman</h4>
+                        <h4 class="page-title">Peminjaman Buku</h4>
                     </div>
                 </div>
             </div>
@@ -38,44 +37,17 @@
                             <?php
                                 if (isset($_SESSION["suksestambah"])){
                                     echo "
-                                    <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                        <strong>".$_SESSION['suksestambah']."</strong>
+                                    <div class='alert alert-info alert-dismissible fade show' role='alert'>
+                                        <strong>".$_SESSION['suksestambah']."</strong> <br>".$_SESSION["suksesmohon"]."
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                             <span aria-hidden='true'>&times;</span>
                                         </button>
                                     </div>
                                     ";
                                     unset($_SESSION['suksestambah']);
-                                }else if (isset($_SESSION["suksesedit"])){
-                                    echo "
-                                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                                        <strong>".$_SESSION['suksesedit']."</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>
-                                    ";
-                                    unset($_SESSION['suksesedit']);
-                                }else if (isset($_SESSION["sukseshapus"])){
-                                    echo "
-                                    <div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                                        <strong>".$_SESSION['sukseshapus']."</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>
-                                    ";
-                                    unset($_SESSION['sukseshapus']);
+                                    unset($_SESSION['suksesmohon']);
                                 }
                             ?>
-                            <div class="row m-b-20">
-                                <div class="col-sm-12">
-                                    <a href="tambah.php" class="float-left btn btn-primary m-b-10 waves-effect waves-light">
-                                        <span><i class="fa fa-user-plus"></i>  Tambah Data</span>
-                                    </a>
-                                </div>
-                            </div>
-                            
 
                             <div class="table-rep-plugin">
                                 <div class="table-responsive b-0" data-pattern="priority-columns">
@@ -83,38 +55,40 @@
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Tanggal Peminjaman</th>
-                                            <th>Tanggal Pengembalian</th>
-                                            <th>Id Buku</th>
-                                            <th>Id Anggota</th>
-                                            <th>Id Petugas</th>
+                                            <th>Cover</th>
+                                            <th>Judul Buku</th>
+                                            <th>Penulis</th>
+                                            <th>Penerbit</th>
+                                            <th>Tahun Terbit</th>
+                                            <th>Stok</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT * FROM tb_peminjaman ORDER BY id DESC";
+                                            $query = "SELECT * FROM tb_buku WHERE stok>0 ORDER BY id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
-                                            <td><?= $data['tanggal_pinjam'] ?></td>
-                                            <td><?= $data['tanggal_kembali'] ?></td>
-                                            <td><?= $data['id_buku'] ?></td>
-                                            <td><?= $data['id_anggota'] ?></td>
-                                            <td><?= $data['id_petugas'] ?></td>
+                                            <td><img class="img-thumbnail img-fluid rounded" width="180px" src="<?=BASEPATH?>/images/<?=$data['sampul']?>"></td>
+                                            <td><?= $data['judul'] ?></td>
+                                            <td><?= $data['penulis'] ?></td>
+                                            <td><?= $data['penerbit'] ?></td>
+                                            <td><?= $data['tahun_terbit'] ?></td>
+                                            <td><?= $data['stok'] ?></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <a href="detail.php?peminjaman=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['id'] ?>">
+                                                        <a href="detail.php?peminjaman=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat buku <?= $data['judul'] ?>">
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <a href="hapus.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['id'] ?>">
-                                                            <i class="mdi mdi-delete-forever"></i></a>
+                                                        <a href="pinjam.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Peminjaman Buku Hanya Bisa Selama 1 Minggu')" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Pinjam buku <?= $data['judul'] ?>">
+                                                            <i class="fa fa-plus-square"></i></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -145,30 +119,7 @@
 <script>
     $(document).ready(function(){
         $('#tabel_buku').DataTable({
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            // dom: 'Blfrtip',
-            dom:"<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5 text-center'B><'col-sm-12 col-md-4'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [
-                {
-                    extend: 'csv', 
-                    className: 'btn-primary',
-                    text: '<i class="mdi mdi-file-excel"></i> CSV',
-                },
-                { 
-                    extend: 'excel', 
-                    className: 'btn-primary',
-                    text: '<i class="mdi mdi-file-excel"></i> Excel', },
-                { 
-                    extend: 'pdf', 
-                    className: 'btn-primary',
-                    text: '<i class="mdi mdi-file-pdf"></i> Pdf', },
-                { 
-                    extend: 'print', 
-                    className: 'btn-primary',
-                    text: '<i class="mdi mdi-printer"></i> Print', },
-            ]
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]
         });
     });
 </script>

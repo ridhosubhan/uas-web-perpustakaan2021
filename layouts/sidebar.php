@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 
-                <?php if(not_admin()) : ?>
+                <?php if(is_admin()) : ?>
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Petugas' || $title == 'Data Anggota' || $title == 'Data Akun') echo 'active'; ?>"><i class="mdi mdi-view-dashboard"></i> <span> Master Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">                       
@@ -41,20 +41,25 @@
                             <li class="<?= $title == 'Data Rak' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/rak" class="waves-effect"><i class="mdi mdi-package"></i> Data Rak </a></li>
                         </ul>
                     </li>
+                <?php endif; ?>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Data Peminjaman' || $title == 'Data Pengembalian') echo 'active'; ?>"><i class="fa fa-shopping-cart"></i> <span> Data Transaksi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Peminjaman' || $title == 'Transaksi Saya' || $title == 'Data Peminjaman' || $title == 'Data Pengembalian') echo 'active'; ?>"><i class="fa fa-shopping-cart"></i> <span> Data Transaksi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
-                            <li class="<?= $title == 'Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="mdi mdi-book-open"></i> Peminjaman</a></li>
-                            <li class="<?= $title == 'Data Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/datapeminjaman" class="waves-effect"><i class="fa fa-calendar-o"></i> Data Peminjaman</a></li>
-                            <li class="<?= $title == 'Data Pengembalian' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/pengembalian" class="waves-effect"><i class="fa fa-calendar"></i> Data Pengembalian</a></li>
+                            <?php if(not_admin()) : ?>
+                                <li class="<?= $title == 'Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="mdi mdi-book-open"></i> Peminjaman</a></li>
+                                <li class="<?= $title == 'Transaksi Saya' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="fa fa-opencart"></i> Transaksi Saya</a></li>
+                            <?php endif; ?>    
+                            <?php if(is_admin()) : ?>
+                                <li class="<?= $title == 'Data Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/datapeminjaman" class="waves-effect"><i class="fa fa-calendar-o"></i> Data Peminjaman</a></li>
+                                <li class="<?= $title == 'Data Pengembalian' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/pengembalian" class="waves-effect"><i class="fa fa-calendar"></i> Data Pengembalian</a></li>
+                            <?php endif; ?>    
                         </ul>
                     </li>
-                <?php endif; ?>
 
                 <li class="menu-title">Pengaturan</li>
                 <li>
-                    <a href="calendar.html" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
+                    <a href="<?= BASEPATH?>profile" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
                 </li>
                 <li>
                     <a href="<?= BASEPATH?>logout.php" class="waves-effect"><i class="mdi mdi-logout"></i><span> Logout </span></a>

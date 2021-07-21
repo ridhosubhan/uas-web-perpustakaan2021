@@ -2,7 +2,7 @@
     $title = 'Data Pengembalian';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
-    session_start();
+    cek_session();
     $con = connect_db();
             
     if(isset($_GET['pengembalian'])){

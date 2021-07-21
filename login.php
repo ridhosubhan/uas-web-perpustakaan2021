@@ -60,7 +60,6 @@
                                         echo"<script>
                                                 window.location.href='index.php';
                                             </script>";
-                                        print_r($_SESSION);
                                     }else{
                                         echo "<script>alert('Password Salah');</script>";
                                     }

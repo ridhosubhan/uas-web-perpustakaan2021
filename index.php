@@ -23,8 +23,9 @@
                         </ol>
                     </div>
                     <h4 class="page-title">Dashboard</h4>
-                                                             
-                    <?php print_r($_SESSION);?>
+                    <!-- <?=print_r($_SESSION)."<br>";?>
+                    <?= data_akun();?>
+                    <?= $profile_anggota['id']?> -->
                 </div>
             </div>
         </div>

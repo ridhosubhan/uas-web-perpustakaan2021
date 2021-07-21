@@ -2,14 +2,14 @@
     $title = 'Peminjaman';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
-    session_start();
+    cek_session();
     $con = connect_db();
 
     include '../../layouts/header.php';
 
     if(isset($_GET['peminjaman'])){
         $idpeminjaman = $_GET['peminjaman'];
-        $query = "SELECT p.tanggal_pinjam, p.tanggal_kembali, buku.judul, anggota.kode_anggota, petugas.nama FROM tb_peminjaman p JOIN tb_buku buku ON p.id_buku=buku.id JOIN tb_anggota anggota ON p.id_anggota=anggota.id JOIN tb_petugas petugas ON p.id_petugas=petugas.id WHERE p.id='$idpeminjaman'";
+        $query = "SELECT * FROM tb_buku WHERE id='$idpeminjaman'";
         $result = execute_query($con, $query);
         $data = mysqli_fetch_array($result);
 ?>
@@ -25,7 +25,7 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Transaksi</a></li>
-                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>views/peminjaman" class="active">Data Peminjaman</a></li>
+                                <li class="breadcrumb-item"><a href="<?=BASEPATH?>views/peminjaman" class="active">Peminjaman</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Detail</a></li>
                             </ol>
                         </div>
@@ -36,31 +36,52 @@
             <!-- end page title end breadcrumb -->
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-4">
                     <div class="card m-b-30">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-12 text-center">
+                                    <img class="img-thumbnail img-fluid rounded" src="<?=BASEPATH?>/images/<?=$data['sampul']?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-8">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <form>
-                                        <div class="form-group">
-                                            <label>Tanggal Peminjaman</label>  
-                                            <input type="text" class="form-control" value="<?= $data['tanggal_pinjam']?>" readonly>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Kode Buku</label>  
+                                                    <input type="text" class="form-control" value="<?= $data['kode_buku']?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Judul Buku</label>  
+                                                    <input type="text" class="form-control" value="<?= $data['judul']?>" readonly>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Tanggal Pengembalian</label>  
-                                            <input type="text" class="form-control" value="<?= $data['tanggal_kembali']?>" readonly>
+                                            <label>Penulis Buku</label>  
+                                            <input type="text" class="form-control" value="<?= $data['penulis']?>" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label>Judul Buku</label>  
-                                            <input type="text" class="form-control" value="<?= $data['judul']?>" readonly>
+                                            <label>Penerbit Buku</label>  
+                                            <input type="text" class="form-control" value="<?= $data['penerbit']?>" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label>Kode Anggota Peminjam</label>  
-                                            <input type="text" class="form-control" value="<?= $data['kode_anggota']?>" readonly>
+                                            <label>Tahun Terbit</label>  
+                                            <input type="text" class="form-control" value="<?= $data['tahun_terbit']?>" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label>Nama Petugas</label>  
-                                            <input type="text" class="form-control" value="<?= $data['nama']?>" readonly>
+                                            <label>Stok Buku</label>  
+                                            <input type="text" class="form-control" value="<?= $data['stok']?>" readonly>
                                         </div>
                                     </form>
                                 </div>
