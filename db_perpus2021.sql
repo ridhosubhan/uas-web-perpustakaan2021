@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2021 at 09:41 AM
+-- Generation Time: Jul 21, 2021 at 08:05 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -43,7 +43,7 @@ CREATE TABLE `tb_anggota` (
 
 INSERT INTO `tb_anggota` (`id`, `kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `status_akun`) VALUES
 (9, 'ANG-0001', 'Jajang Maman', 'L', '08119901717', 'polo', 0),
-(11, 'ANG-0002', 'Danila', 'P', '08119901717', 'adsdasdas', 0);
+(11, 'ANG-0002', 'Danila', 'P', '08119901717', 'adsdasdas', 1);
 
 -- --------------------------------------------------------
 
@@ -68,8 +68,8 @@ CREATE TABLE `tb_buku` (
 --
 
 INSERT INTO `tb_buku` (`id`, `kode_buku`, `judul`, `sampul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `id_rak`) VALUES
-(1, 'BKU-0001', 'Cara Cepat Kaya', 'james-sutton-dQ5G0h7sLno-unsplash.jpg', 'Jo', 'Pesugihan Printing', '1998', 100, 1),
-(2, 'BKU-0002', 'CARA MATI', 'WhatsApp Image 2021-07-16 at 21.53.13.jpeg', 'ASU', 'ASU JAYA', '2021', 10, 1);
+(1, 'BKU-0001', 'Cara Cepat Kaya', 'james-sutton-dQ5G0h7sLno-unsplash.jpg', 'Jo', 'Pesugihan Printing', '1998', 98, 1),
+(2, 'BKU-0002', 'CARA MATI', 'WhatsApp Image 2021-07-16 at 21.53.13.jpeg', 'ASU', 'ASU JAYA', '2021', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -121,8 +121,10 @@ CREATE TABLE `tb_petugas` (
 --
 
 INSERT INTO `tb_petugas` (`id`, `nama`, `jabatan`, `no_telp`, `alamat`, `status_akun`) VALUES
-(3, 'Jang Danil', 'Supervisor', '08119901717', 'Jalan Sesama', 1),
-(4, 'Jihan Rahmi Ayu', 'Manager', '08119901717', 'Dimana aja bang', 0);
+(3, 'Jang Danil', 'Supervisor', '08119901717', 'Jalan Sesama', 0),
+(4, 'Jihan Rahmi Ayu', 'Manager', '08119901717', 'Dimana aja bang', 1),
+(5, 'Jajang Maman', 'Manager', '08119901717', 'adsadsa', 0),
+(6, 'Religi Kristen', 'Supervisor', '08119901717', 'adsdasd', 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +157,7 @@ INSERT INTO `tb_rak` (`id`, `nama`, `lokasi`) VALUES
 CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` varchar(100) NOT NULL,
   `relasi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -165,7 +167,8 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `role`, `relasi`) VALUES
-(7, 'admin', 'polopolo', 'Admin', 3);
+(13, 'admin', '$2y$10$4K8xPmGWNFk6jmomVwnPWeyT2uL5Mi.uqQn0haSnAES71nIT0kqKe', 'Admin', 4),
+(14, 'anggota', '$2y$10$BkX7mG27geCyMhT70QYKRuvjNCGY4kJQvnN7q7wA5tY2Qm/b1Ooyi', 'Anggota', 11);
 
 --
 -- Indexes for dumped tables
@@ -244,7 +247,7 @@ ALTER TABLE `tb_buku`
 -- AUTO_INCREMENT for table `tb_peminjaman`
 --
 ALTER TABLE `tb_peminjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_pengembalian`
@@ -256,7 +259,7 @@ ALTER TABLE `tb_pengembalian`
 -- AUTO_INCREMENT for table `tb_petugas`
 --
 ALTER TABLE `tb_petugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_rak`
@@ -268,7 +271,7 @@ ALTER TABLE `tb_rak`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -284,9 +287,7 @@ ALTER TABLE `tb_buku`
 -- Constraints for table `tb_peminjaman`
 --
 ALTER TABLE `tb_peminjaman`
-  ADD CONSTRAINT `fk_peminjaman_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `tb_anggota` (`id`),
-  ADD CONSTRAINT `fk_peminjaman_buku` FOREIGN KEY (`id_buku`) REFERENCES `tb_buku` (`id`),
-  ADD CONSTRAINT `fk_peminjaman_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id`);
+  ADD CONSTRAINT `fk_peminjaman_buku` FOREIGN KEY (`id_buku`) REFERENCES `tb_buku` (`id`);
 
 --
 -- Constraints for table `tb_pengembalian`
