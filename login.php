@@ -99,7 +99,7 @@
 
                             <div class="form-group mb-0 row float-right">
                                 <div class="col-sm-12">
-                                    <a href="pages-register.html" class="text-muted"><i class="mdi mdi-account-circle"></i> <small>Create an account ?</small></a>
+                                    <a href="register.php" class="text-muted"><i class="mdi mdi-account-circle"></i> <small>Create an account ?</small></a>
                                 </div>
                             </div>
                         </form>

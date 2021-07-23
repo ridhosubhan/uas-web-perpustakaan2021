@@ -34,94 +34,94 @@
                     <div class="p-3">
                     <?php
                     function idanggota(){
-                    // mengambil data barang dengan kode paling besar
-                    $con = connect_db();
-                    $query = "SELECT max(id) as idTerbesar FROM tb_anggota";
-                    $result = execute_query($con, $query);
+                        // mengambil data barang dengan kode paling besar
+                        $con = connect_db();
+                        $query = "SELECT max(kode_anggota) as kodeTerbesar FROM tb_anggota";
+                        $result = execute_query($con, $query);
 
-                    $data = mysqli_fetch_array($result);
+                        $data = mysqli_fetch_array($result);
 
-                    $idAnggota = $data['idTerbesar'];
+                        $kodeAnggota = $data['kodeTerbesar'];
 
-                    // mengambil angka dari kode barang terbesar, menggunakan fungsi substr
-                    // dan diubah ke integer dengan (int)
-                    $urutan = (int) substr($idAnggota, 4, 4);
+                        // mengambil angka dari kode barang terbesar, menggunakan fungsi substr
+                        // dan diubah ke integer dengan (int)
+                        $urutan = (int) substr($kodeAnggota, 4, 4);
 
-                    // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
-                    $urutan++;
-                    
-                    // membentuk kode barang baru
-                    // perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
-                    // misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
-                    // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
-                    $idAnggota = $urutan;
-                    return $idAnggota;
+                        // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+                        $urutan++;
+                        
+                        // membentuk kode barang baru
+                        // perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
+                        // misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
+                        // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
+                        $huruf = "ANG-";
+                        $kodeAnggota = $huruf . sprintf("%04s", $urutan);
+                        return $kodeAnggota;
                     }
                     
                     include 'konfigurasi/config.php';
                     include 'konfigurasi/function.php';
-                    include 'views/anggota/controller.php';
+                    // include 'views/anggota/controller.php';
                     $con = connect_db();
 
                     if(isset($_POST['simpan'])){
-                        $id_anggota = idanggota();
-                
                         $username = $_POST['_username'];
                         $password = password_hash($_POST['_password'],PASSWORD_DEFAULT);
-                        $role = $_POST['_role'];
-                        if(!empty($id_anggota)){
+                        $role = 'Anggota';
+
+                        $kode_anggota = idanggota();
+                        $nama = $_POST['_nama'];
+                        $jenkel = $_POST['_jenkel'];
+                        $notelp = $_POST['_notelp'];
+                        $alamat = $_POST['_alamat'];
+                        if(!empty($kode_anggota)){
                             $query = "SELECT * from tb_user WHERE username='$username'";
                             $result = execute_query($con, $query);
                             if(mysqli_num_rows($result) > 0){
                                 echo "
                                     <script>
-                                        window.location.href='login.php';
+                                        window.location.href='register.php';
                                         alert('Username Sudah Ada di Database');
                                     </script>";
                             } else {
-                                //Update status akun 
-                                $kueri = "UPDATE tb_anggota SET status_akun=1 WHERE id = '$id_anggota'";
-                                $update_anggota = execute_query($con, $kueri);
-                
+                                // INSERT KE TB_ANGGOTA
+                                $queries = "INSERT INTO `tb_anggota` (`kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `status_akun`) VALUES ('$kode_anggota', '$nama', '$jenkel', '$notelp', '$alamat', '1')";
+                                $results = execute_query($con, $queries);
+                                
+                                // SELECT ID ANGGOTA YANG BARU AJA DIINSERT
+                                $query = "SELECT * from tb_anggota WHERE kode_anggota='$kode_anggota'";
+                                $result = execute_query($con, $query);
+                                $data = mysqli_fetch_array($result);
+                                $id_anggota = $data['id'];
+                                
                                 $queri = "INSERT INTO `tb_user` (`username`, `password`, `role`, `relasi`) VALUES ('$username', '$password', '$role', '$id_anggota')";
                                 $result = execute_query($con, $queri);
                                 if (mysqli_affected_rows($con) >0){
-                                    $_SESSION["suksestambah"] = "Berhasil Menambah Data Akun Anggota";
                                     echo "
                                         <script>
+                                            alert('Berhasil registrasi!! Silakan Login');
                                             window.location.href='login.php';
-                                            alert('Username dan Password sudah dibuat, Silahkan Login');
                                         </script>
                                     ";
-                                }
+                                }   
                             }
                         }
                     }
                     ?>
-                    <?=tambah()?>
-
                         <form class="form-horizontal" name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <input name="_anggota" id="_anggota" value="<?=idanggota();?>" type="hidden" class="form-control" placeholder="ID Anggota" required readonly>
                             </div>
-
+                            
                             <div class="form-group">
-                                <label>Username</label> 
+                                <label>Username <?=idanggota()?></label> 
                                 <input class="form-control" name="_username" id="_username" type="text" placeholder="Username" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label> 
                                 <input class="form-control" name="_password" id="_password" type="password" placeholder="Password" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Role</label> 
-                                    <select class="form-control select2" name="_role" id="_role">
-                                        <option value="" disabled selected>Pilih Role</option>
-                                        <option value="Anggota"> Anggota</option>
-                                    </select>
                             </div>
                             
                             <div class="form-group">
@@ -149,7 +149,7 @@
                             </div>
 
                             <div class="form-group">
-                                <input name="_kodeanggota" id="_kodeanggota" type="hidden" value="<?=kodeanggota();?>" class="form-control" placeholder="Kode Anggota" required readonly>
+                                <input name="_kodeanggota" id="_kodeanggota" type="hidden" value="<?=idanggota();?>" class="form-control" placeholder="Kode Anggota" required readonly>
                             </div>
 
                             <div class="form-group row">
@@ -163,7 +163,7 @@
 
                             <div class="form-group text-center row m-t-20">
                                 <div class="col-12">
-                                    <button class="btn btn-danger btn-block waves-effect waves-light" name="simpan" id="simpan" type="submit">Register</button>
+                                    <button class="btn btn-danger btn-block waves-effect waves-light" value="simpan" name="simpan" id="simpan" type="submit">Register</button>
                                 </div>
                             </div>
 

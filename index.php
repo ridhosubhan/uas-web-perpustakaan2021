@@ -23,9 +23,10 @@
                         </ol>
                     </div>
                     <h4 class="page-title">Dashboard</h4>
-                    <!-- <?=print_r($_SESSION)."<br>";?>
+                    <?=print_r($_SESSION)."<br>";?>
                     <?= data_akun();?>
-                    <?= $profile_anggota['id']?> -->
+                    <?=var_dump($profile_anggota)."<br>"?>
+                    <?=var_dump($profile_petugas)?>
                 </div>
             </div>
         </div>
