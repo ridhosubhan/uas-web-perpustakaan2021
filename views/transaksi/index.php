@@ -54,29 +54,33 @@
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
+                                                
+                                                //TAMPILKAN STATUS PEMINJAMAN
+                                                $conn = connect_db();
+                                                $queri = "SELECT * FROM tb_pengembalian WHERE id_anggota='$idanggota'";
+                                                $results = execute_query($conn, $queri);
+                                                while($data_pinjam = mysqli_fetch_array($results)){
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
                                             <td><?= $data['judul'] ?></td>
                                             <td><?= date("l, d-F-Y", strtotime($data['tanggal_pinjam']) ) ?></td>
-                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_kembali']) ) ?></td>
-                                            <!-- //TAMPILKAN STATUS PEMINJAMAN -->
-                                            <?php 
-                                                $conn = connect_db();
-                                                $queri = "SELECT * FROM tb_pengembalian WHERE id_anggota='$idanggota'";
-                                                $results = execute_query($conn, $queri);
-                                                $data_pinjam = mysqli_fetch_assoc($results);
-                                            ?>
+                                            <td><?= date("l, d-F-Y", strtotime($data_pinjam['tanggal_pengembalian']) ) ?></td>
+                                            
                                             <td class="text-center">
-                                                <?php if($data_pinjam['id_anggota']==0) : ?>
+                                                <?php if($data['id_petugas']==0) : ?>
                                                     <h5>
-                                                        <span class="text-white badge badge-danger">Belum Dikembalikan</span>
+                                                        <span class="text-white badge badge-info">Belum Disetujui</span>
                                                     </h5>
-                                                <?php elseif ($data['denda']>0) : ?>
+                                                <?php elseif ( ($data['id_petugas']!=0) && empty($data_pinjam['id_anggota']) ) : ?>
                                                     <h5>
-                                                        <span class="badge badge-warning">Telat Mengambalikan</span>
+                                                        <span class="text-white badge badge-success">Peminjaman Disetujui</span>
+                                                    </h5>
+                                                <?php elseif ($data_pinjam['denda']>0) : ?>
+                                                    <h5>
+                                                        <span class="badge badge-danger">Telat Mengambalikan</span>
                                                     </h5>  
-                                                <?php elseif ($data_pinjam['id_anggota']!=1) : ?>  
+                                                <?php elseif (!empty($data_pinjam['id_anggota'])) : ?>  
                                                     <h5>
                                                         <span class="badge badge-success">Dikembalikan</span>
                                                     </h5>
@@ -84,7 +88,8 @@
                                             </td>
                                         </tr>
                                         <?php
-                                            $no++;
+                                                $no++;
+                                                }
                                             }
                                         ?>
                                         </tbody>

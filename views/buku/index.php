@@ -76,8 +76,8 @@
                                 </div>
                             </div>
 
-                            <div class="table-rep-plugin">
-                                <div class="table-responsive b-0" data-pattern="priority-columns">
+                            <div class="table-rep-plugin row">
+                                <div class="table-responsive b-0 col-sm-12" data-pattern="priority-columns">
                                     <table id="tabel_buku" class="table table-hover" width="100%">
                                         <thead class="text-white text-center bg-primary">
                                         <tr>
@@ -107,17 +107,22 @@
                                             <td><?= $data['penerbit'] ?></td>
                                             <td><?= $data['tahun_terbit'] ?></td>
                                             <td><?= $data['stok'] ?></td>
-                                            <td>
+                                            <td class="text-center">
                                                 <div class="row">
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-12">
                                                         <a href="detail.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['kode_buku'] ?>">
                                                             <i class="mdi mdi-account-card-details"></i></a>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
                                                         <a href="edit.php?buku=<?= $data['kode_buku'] ?>" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Edit data <?= $data['kode_buku'] ?>">
                                                             <i class="mdi mdi-pencil-box"></i></a>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
                                                         <a href="hapus.php?buku=<?= $data['kode_buku'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['kode_buku'] ?>">
                                                             <i class="mdi mdi-delete-forever"></i></a>
                                                     </div>

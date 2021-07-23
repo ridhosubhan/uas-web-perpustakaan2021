@@ -75,22 +75,16 @@
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
                                             <td><img class="img-thumbnail img-fluid rounded" width="180px" src="<?=BASEPATH?>/images/<?=$data['sampul']?>"></td>
-                                            <td><?= $data['judul'] ?></td>
+                                            <td>
+                                                <a href="detail.php?peminjaman=<?= $data['id'] ?>"> <?= $data['judul'] ?></a>
+                                            </td>
                                             <td><?= $data['penulis'] ?></td>
                                             <td><?= $data['penerbit'] ?></td>
                                             <td><?= $data['tahun_terbit'] ?></td>
                                             <td><?= $data['stok'] ?></td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <a href="detail.php?peminjaman=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat buku <?= $data['judul'] ?>">
-                                                            <i class="mdi mdi-account-card-details"></i></a>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <a href="pinjam.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Peminjaman Buku Hanya Bisa Selama 1 Minggu')" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Pinjam buku <?= $data['judul'] ?>">
-                                                            <i class="fa fa-plus-square"></i></a>
-                                                    </div>
-                                                </div>
+                                            <td class="text-center">
+                                                <a href="pinjam.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Peminjaman Buku Hanya Bisa Selama 1 Minggu')" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Pinjam buku <?= $data['judul'] ?>">
+                                                    <i class="fa fa-plus-square"></i></a>
                                             </td>
                                         </tr>
                                         <?php

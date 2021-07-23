@@ -22,11 +22,13 @@
                             <li class="breadcrumb-item"><a href="#" class="active">Dashboard</a></li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Dashboard</h4>
-                    <?=print_r($_SESSION)."<br>";?>
-                    <?= data_akun();?>
-                    <?=var_dump($profile_anggota)."<br>"?>
-                    <?=var_dump($profile_petugas)?>
+                    <h4 class="page-title"><?=$_SESSION['isRole']?> - Dashboard</h4>
+                    <!-- <code>
+                        <?=var_dump($_SESSION)."<br>";?>
+                        <?= data_akun();?>
+                        <?=var_dump($profile_anggota)."<br>"?>
+                        <?=var_dump($profile_petugas)?>
+                    </code> -->
                 </div>
             </div>
         </div>

@@ -15,24 +15,24 @@ function tambah(){
         $result = execute_query($con, $query);
         //DELETE table peminjaman
         if(mysqli_num_rows($result) > 0){
-            $queris = "DELETE FROM tb_peminjaman WHERE id='$id_peminjam'";
-            $results = execute_query($con, $queris);
+            // $queris = "DELETE FROM tb_peminjaman WHERE id='$id_peminjam'";
+            // $results = execute_query($con, $queris);
             //UPDATE STOK table buku
-            if(mysqli_affected_rows($con) > 0){
-                $kueri = "UPDATE tb_buku SET stok = stok+1 WHERE id='$id_buku'";
-                $hasil = execute_query($con, $kueri);
-                //INSERT tb pengembalian
-                $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
-                $result = execute_query($con, $queri);
-                if (mysqli_affected_rows($con) >0){
-                    $_SESSION["suksestambah"] = "Berhasil Memproses Data Pengembalian";
-                    echo "
-                        <script>
-                            window.location.href='index.php';
-                        </script>
-                    ";
-                }
-            }       
+            $kueri = "UPDATE tb_buku SET stok = stok+1 WHERE id='$id_buku'";
+            $hasil = execute_query($con, $kueri);
+            //INSERT tb pengembalian
+            $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
+            $result = execute_query($con, $queri);
+            if (mysqli_affected_rows($con) >0){
+                $_SESSION["suksestambah"] = "Berhasil Memproses Data Pengembalian";
+                echo "
+                    <script>
+                        window.location.href='index.php';
+                    </script>
+                ";
+            }
+            // if(mysqli_affected_rows($con) > 0){
+            // }       
         } 
     }
 }

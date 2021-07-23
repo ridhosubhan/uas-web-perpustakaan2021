@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jul 2021 pada 05.06
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.2
+-- Generation Time: Jul 23, 2021 at 03:51 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_anggota`
+-- Table structure for table `tb_anggota`
 --
 
 CREATE TABLE `tb_anggota` (
@@ -39,16 +38,17 @@ CREATE TABLE `tb_anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_anggota`
+-- Dumping data for table `tb_anggota`
 --
 
 INSERT INTO `tb_anggota` (`id`, `kode_anggota`, `nama`, `jenkel`, `no_telp`, `alamat`, `status_akun`) VALUES
-(1, 'ANG-0001', 'Brando Franco Windah', 'L', '085797803313', 'Jalan Bogor Underground No 69', 0);
+(1, 'ANG-0001', 'Dadang Conello', 'L', '08119901717', 'Jalan. Cornering 120', 0),
+(2, 'ANG-0002', 'Jon Dalton', 'L', '08119901717', 'jalan Pengenali Saiton', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_buku`
+-- Table structure for table `tb_buku`
 --
 
 CREATE TABLE `tb_buku` (
@@ -64,17 +64,25 @@ CREATE TABLE `tb_buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_buku`
+-- Dumping data for table `tb_buku`
 --
 
 INSERT INTO `tb_buku` (`id`, `kode_buku`, `judul`, `sampul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `id_rak`) VALUES
-(1, 'BKU-0001', 'Cara Cepat Kaya', 'james-sutton-dQ5G0h7sLno-unsplash.jpg', 'Jo', 'Pesugihan Printing', '1998', 98, 1),
-(2, 'BKU-0002', 'CARA MATI', 'WhatsApp Image 2021-07-16 at 21.53.13.jpeg', 'ASU', 'ASU JAYA', '2021', 8, 1);
+(1, 'BKU-0001', 'Harry Potter and the Philosopher’s Stone', '91l1Op79AWL.jpg', 'J.K Rowling', 'Elex Media Komputindo', '1997', 100, 1),
+(2, 'BKU-0002', 'Dunia Shopee', '4a2c19a4fd656fdf3dc86150ba7e94f1.jpg', 'Jostein Gaarder', 'Mizan', '1991', 10, 1),
+(3, 'BKU-0003', 'Sebuah Seni untuk Bersikap Bodo Amat', '9786024526986_Sebuah-Seni-Untuk-Bersikap-Bodo-Amat.jpg', 'Mark Manson', ' Gramedia Widiasarana Indonesia', '2005', 5, 2),
+(4, 'BKU-0004', 'The Godfather', '9786020339245_sang-godfather-_the-godfather_-cover-baru.jpg', 'Mario Puzzo', ' Gramedia Widiasarana Indonesia', '2017', 90, 1),
+(5, 'BKU-0005', 'Al Quran Dan Sains', 'img20200929_14561196.jpg', 'Dr. H. Ridwan Abdullah Sani, M.Si.', 'Amzah', '2020', 666, 3),
+(6, 'BKU-0006', 'Agar Suami Tak Mendua', 'ID_SM2019MTH07SM.jpg', 'Muyassaroh, Muyassaroh', 'Elex Media Komputindo', '2019', 9, 3),
+(7, 'BKU-0007', 'Selena', '9786020639512_selena_cov.jpg', 'Tere Liye', 'Gramedia Pustaka Utama', '2016', 99, 1),
+(8, 'BKU-0008', 'Bicara Itu Ada Seninya', '9786024553920.jpg', 'Oh Su Hyang', ' Bhuana Ilmu Populer', '2019', 100, 2),
+(9, 'BKU-0009', 'Duduk Perkara Poligami', 'ID_SIS2015MTH05IDTMN_S.jpg', 'Murthada Muntahri', ' Serambi Ilmu Semesta', '2015', 80, 1),
+(10, 'BKU-0010', 'Kejahatan Terorganisasi (Organized Crime) Akar Dan Perkembangannya', '9786024220204_kejahatan_terorganisasi_organized_crime_akar_dan_perkembangannya.jpeg', 'Jay S. Albanese', 'Kencana Prenada Media', '2016', 190, 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_peminjaman`
+-- Table structure for table `tb_peminjaman`
 --
 
 CREATE TABLE `tb_peminjaman` (
@@ -86,10 +94,17 @@ CREATE TABLE `tb_peminjaman` (
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_peminjaman`
+--
+
+INSERT INTO `tb_peminjaman` (`id`, `tanggal_pinjam`, `tanggal_kembali`, `id_buku`, `id_anggota`, `id_petugas`) VALUES
+(2, '2021-07-23', '2021-07-30', 10, 2, 1);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pengembalian`
+-- Table structure for table `tb_pengembalian`
 --
 
 CREATE TABLE `tb_pengembalian` (
@@ -101,10 +116,18 @@ CREATE TABLE `tb_pengembalian` (
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_pengembalian`
+--
+
+INSERT INTO `tb_pengembalian` (`id`, `tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES
+(1, '2021-08-27', 200000, 10, 2, 1),
+(2, '2021-07-24', 0, 10, 2, 1);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_petugas`
+-- Table structure for table `tb_petugas`
 --
 
 CREATE TABLE `tb_petugas` (
@@ -117,19 +140,16 @@ CREATE TABLE `tb_petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_petugas`
+-- Dumping data for table `tb_petugas`
 --
 
 INSERT INTO `tb_petugas` (`id`, `nama`, `jabatan`, `no_telp`, `alamat`, `status_akun`) VALUES
-(1, 'Jihan Rahmi Ayu', 'Manager', '08119901717', 'Dimana aja bang', 1),
-(3, 'Jang Danil', 'Supervisor', '08119901717', 'Jalan Sesama', 0),
-(5, 'Jajang Maman', 'Manager', '08119901717', 'adsadsa', 0),
-(6, 'Religi Kristen', 'Supervisor', '08119901717', 'adsdasd', 0);
+(1, 'Admin Jihoy', 'Manager', '082355667788', 'Jalan Kocak', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_rak`
+-- Table structure for table `tb_rak`
 --
 
 CREATE TABLE `tb_rak` (
@@ -139,19 +159,18 @@ CREATE TABLE `tb_rak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_rak`
+-- Dumping data for table `tb_rak`
 --
 
 INSERT INTO `tb_rak` (`id`, `nama`, `lokasi`) VALUES
-(1, 'Karya Ilmiah', 'A-1'),
-(2, 'Fiksi', 'A-2'),
-(3, 'Religi Islami', 'B-12'),
-(4, 'Religi Kristen', 'B-11');
+(1, 'Fantasi Petualangan', 'F-1'),
+(2, 'Karya Ilmiah', 'K-1'),
+(3, 'Kitab Religi', 'R-1');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -163,19 +182,19 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_user`
+-- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `role`, `relasi`) VALUES
 (1, 'admin', '$2y$10$4K8xPmGWNFk6jmomVwnPWeyT2uL5Mi.uqQn0haSnAES71nIT0kqKe', 'Admin', 1),
-(2, 'anggota', '$2y$10$IWmx6aAQQ5NUXtc7BGpjEuvpWiEfs.ia5C5.rs7YU4lrb44hXP2om', 'Anggota', 1);
+(2, 'jon', '$2y$10$1UoAA.bLdhZuNP0RFYuru.7BApCTJa9kCLF9k84C7bOT1IIB/Uqr.', 'Anggota', 2);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tb_anggota`
+-- Indexes for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`),
@@ -183,7 +202,7 @@ ALTER TABLE `tb_anggota`
   ADD KEY `fk_anggota_user` (`status_akun`);
 
 --
--- Indeks untuk tabel `tb_buku`
+-- Indexes for table `tb_buku`
 --
 ALTER TABLE `tb_buku`
   ADD PRIMARY KEY (`id`),
@@ -191,7 +210,7 @@ ALTER TABLE `tb_buku`
   ADD KEY `id_rak` (`id_rak`);
 
 --
--- Indeks untuk tabel `tb_peminjaman`
+-- Indexes for table `tb_peminjaman`
 --
 ALTER TABLE `tb_peminjaman`
   ADD PRIMARY KEY (`id`),
@@ -200,7 +219,7 @@ ALTER TABLE `tb_peminjaman`
   ADD KEY `fk_peminjaman_petugas` (`id_petugas`);
 
 --
--- Indeks untuk tabel `tb_pengembalian`
+-- Indexes for table `tb_pengembalian`
 --
 ALTER TABLE `tb_pengembalian`
   ADD PRIMARY KEY (`id`),
@@ -209,88 +228,88 @@ ALTER TABLE `tb_pengembalian`
   ADD KEY `fk_pengembalian_petugas` (`id_petugas`);
 
 --
--- Indeks untuk tabel `tb_petugas`
+-- Indexes for table `tb_petugas`
 --
 ALTER TABLE `tb_petugas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_petugas_user` (`status_akun`);
 
 --
--- Indeks untuk tabel `tb_rak`
+-- Indexes for table `tb_rak`
 --
 ALTER TABLE `tb_rak`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_user`
+-- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_anggota`
+-- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_buku`
+--
+ALTER TABLE `tb_buku`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tb_peminjaman`
+--
+ALTER TABLE `tb_peminjaman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_pengembalian`
+--
+ALTER TABLE `tb_pengembalian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_petugas`
+--
+ALTER TABLE `tb_petugas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_buku`
---
-ALTER TABLE `tb_buku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `tb_peminjaman`
---
-ALTER TABLE `tb_peminjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `tb_pengembalian`
---
-ALTER TABLE `tb_pengembalian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `tb_petugas`
---
-ALTER TABLE `tb_petugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT untuk tabel `tb_rak`
+-- AUTO_INCREMENT for table `tb_rak`
 --
 ALTER TABLE `tb_rak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_user`
+-- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_buku`
+-- Constraints for table `tb_buku`
 --
 ALTER TABLE `tb_buku`
   ADD CONSTRAINT `tb_buku_ibfk_1` FOREIGN KEY (`id_rak`) REFERENCES `tb_rak` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_peminjaman`
+-- Constraints for table `tb_peminjaman`
 --
 ALTER TABLE `tb_peminjaman`
   ADD CONSTRAINT `fk_peminjaman_buku` FOREIGN KEY (`id_buku`) REFERENCES `tb_buku` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_pengembalian`
+-- Constraints for table `tb_pengembalian`
 --
 ALTER TABLE `tb_pengembalian`
   ADD CONSTRAINT `fk_pengembalian_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `tb_anggota` (`id`),
