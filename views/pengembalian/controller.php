@@ -21,18 +21,16 @@ function tambah(){
             if(mysqli_affected_rows($con) > 0){
                 $kueri = "UPDATE tb_buku SET stok = stok+1 WHERE id='$id_buku'";
                 $hasil = execute_query($con, $kueri);
-                if(mysqli_num_rows($hasil) > 0){
-                    //INSERT tb pengembalian
-                    $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
-                    $result = execute_query($con, $queri);
-                    if (mysqli_affected_rows($con) >0){
-                        $_SESSION["suksestambah"] = "Berhasil Memproses Data Pengembalian";
-                        echo "
-                            <script>
-                                window.location.href='index.php';
-                            </script>
-                        ";
-                    }
+                //INSERT tb pengembalian
+                $queri = "INSERT INTO `tb_pengembalian` (`tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES ('$tgl_pengembalian', '$denda', '$id_buku', '$id_anggota', '$id_petugas')";
+                $result = execute_query($con, $queri);
+                if (mysqli_affected_rows($con) >0){
+                    $_SESSION["suksestambah"] = "Berhasil Memproses Data Pengembalian";
+                    echo "
+                        <script>
+                            window.location.href='index.php';
+                        </script>
+                    ";
                 }
             }       
         } 

@@ -60,8 +60,8 @@
                                             <label>Nama Peminjam</label> 
                                             <input type="hidden" id="_idPetugas" name="_idPetugas" class="form-control"> <!-- ID BUKU -->
                                             <input type="hidden" id="_idBuku" name="_idBuku" class="form-control"> <!-- ID BUKU -->
-                                            <input type="hidden" id="_namapeminjam" class="form-control"> <!-- NAMA PEMINJAM -->
-                                            <input type="text" id="_id_anggota" name="_id_anggota" class="form-control">
+                                            <input type="hidden" id="_id_anggota" name="_id_anggota" class="form-control" ><!-- NAMA PEMINJAM -->
+                                            <input type="text" id="_namapeminjam" class="form-control"> 
                                         </div>
                                     </div>
                                 </div>

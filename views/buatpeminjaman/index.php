@@ -1,5 +1,5 @@
 <?php 
-    $title = 'Data Peminjaman';
+    $title = 'Buat Peminjaman';
     include '../../konfigurasi/config.php';
     include '../../konfigurasi/function.php'; 
     cek_session();
@@ -20,10 +20,10 @@
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="<?=BASEPATH?>" class="active">Menu Utama</a></li>
                                 <li class="breadcrumb-item"><a href="#" class="active">Data Transaksi</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="active">Data Peminjam Buku</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="active">Buat Peminjaman</a></li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Data Peminjam Buku</h4>
+                        <h4 class="page-title">Peminjaman Buku</h4>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <?php
                                 if (isset($_SESSION["suksestambah"])){
                                     echo "
-                                    <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                    <div class='alert alert-info alert-dismissible fade show' role='alert'>
                                         <strong>".$_SESSION['suksestambah']."</strong> <br>".$_SESSION["suksesmohon"]."
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                             <span aria-hidden='true'>&times;</span>
@@ -58,16 +58,16 @@
                                             <th>Cover</th>
                                             <th>Judul Buku</th>
                                             <th>Penulis</th>
+                                            <th>Penerbit</th>
+                                            <th>Tahun Terbit</th>
                                             <th>Stok</th>
-                                            <th>Peminjam</th>
-                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT tb_peminjaman.id as kode,tb_buku.id as kodebuku, tb_peminjaman.*, tb_buku.*, tb_anggota.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id INNER JOIN tb_anggota ON tb_peminjaman.id_anggota=tb_anggota.id ORDER BY tb_peminjaman.id DESC";
+                                            $query = "SELECT * FROM tb_buku WHERE stok>0 ORDER BY id DESC";
                                             $result = execute_query($con, $query);
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($result)){
@@ -77,27 +77,20 @@
                                             <td><img class="img-thumbnail img-fluid rounded" width="180px" src="<?=BASEPATH?>/images/<?=$data['sampul']?>"></td>
                                             <td><?= $data['judul'] ?></td>
                                             <td><?= $data['penulis'] ?></td>
+                                            <td><?= $data['penerbit'] ?></td>
+                                            <td><?= $data['tahun_terbit'] ?></td>
                                             <td><?= $data['stok'] ?></td>
-                                            <td><?= $data['nama'] ?></td>
                                             <td>
-                                                <?php if($data['id_petugas']==0) : ?>
-                                                    <h5>
-                                                        <span class="text-white badge badge-warning">Waiting Approval</span>
-                                                    </h5>
-                                                <?php elseif ($data['id_petugas']!=0) : ?>  
-                                                        <h5>
-                                                            <span class="badge badge-success">Approved</span>
-                                                        </h5>
-                                                <?php endif; ?>  
-                                            </td>
-                                            <td>
-                                            <?php if($data['id_petugas']==0) : ?>
-                                                <a href="proses.php?id=<?= $data['kode'] ?>&buku=<?= $data['kodebuku'] ?>" onclick="return confirm('Approve Peminjaman Buku?')" class="btn btn-info waves-effect waves-light">
-                                                    <i class="fa fa-check-square"></i> Proses</a>
-                                            <?php elseif ($data['id_petugas']!=0) : ?>  
-                                                <button class="btn btn-info waves-effect waves-light" disabled>
-                                                    <i class="fa fa-check-square"></i> Proses</button>
-                                            <?php endif; ?>  
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <a href="detail.php?peminjaman=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat buku <?= $data['judul'] ?>">
+                                                            <i class="mdi mdi-account-card-details"></i></a>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <a href="pinjam.php?peminjaman=<?= $data['id'] ?>" onclick="return confirm('Peminjaman Buku Hanya Bisa Selama 1 Minggu')" class="btn btn-info waves-effect waves-light" data-toggle="tooltip" title="Pinjam buku <?= $data['judul'] ?>">
+                                                            <i class="fa fa-plus-square"></i></a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php

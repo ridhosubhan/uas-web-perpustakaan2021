@@ -44,13 +44,14 @@
                 <?php endif; ?>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Peminjaman' || $title == 'Transaksi Saya' || $title == 'Data Peminjaman' || $title == 'Data Pengembalian') echo 'active'; ?>"><i class="fa fa-shopping-cart"></i> <span> Data Transaksi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript:void(0);" class="waves-effect <?php if($title == 'Peminjaman' || $title == 'Buat Peminjaman' || $title == 'Transaksi Saya' || $title == 'Data Peminjaman' || $title == 'Data Pengembalian') echo 'active'; ?>"><i class="fa fa-shopping-cart"></i> <span> Data Transaksi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="list-unstyled">
                             <?php if(not_admin()) : ?>
                                 <li class="<?= $title == 'Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/peminjaman" class="waves-effect"><i class="mdi mdi-book-open"></i> Peminjaman</a></li>
                                 <li class="<?= $title == 'Transaksi Saya' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/transaksi" class="waves-effect"><i class="fa fa-opencart"></i> Transaksi Saya</a></li>
-                            <?php endif; ?>    
-                            <?php if(is_admin()) : ?>
+                                <?php endif; ?>    
+                                <?php if(is_admin()) : ?>
+                                <li class="<?= $title == 'Buat Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/buatpeminjaman" class="waves-effect"><i class="mdi mdi-book-open"></i> Buat Peminjaman</a></li>
                                 <li class="<?= $title == 'Data Peminjaman' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/datapeminjaman" class="waves-effect"><i class="fa fa-calendar-o"></i> Data Peminjaman</a></li>
                                 <li class="<?= $title == 'Data Pengembalian' ? 'active' : ''; ?>"><a href="<?= BASEPATH?>views/pengembalian" class="waves-effect"><i class="fa fa-calendar"></i> Data Pengembalian</a></li>
                             <?php endif; ?>    

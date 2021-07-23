@@ -84,20 +84,18 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Judul Buku</th>
-                                            <th>Tanggal Peminjaman</th>
                                             <th>Tanggal Pengembalian</th>
-                                            <th>Denda</th>
                                             <th>Nama Peminjam</th>
                                             <th>Petugas</th>
-                                            <th>Aksi</th>
+                                            <th>Denda</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                       
                                         <?php
-                                            $query = "SELECT tb_buku.*, tb_peminjaman.*, tb_pengembalian.*, tb_petugas.nama as namapetugas, tb_anggota.nama as namaanggota FROM tb_pengembalian 
+                                            $query = "SELECT tb_buku.*, tb_pengembalian.*, tb_petugas.nama as namapetugas, tb_anggota.nama as namaanggota FROM tb_pengembalian 
                                             INNER JOIN tb_buku ON tb_buku.id = tb_pengembalian.id_buku 
-                                            INNER JOIN tb_peminjaman ON tb_peminjaman.id_buku = tb_pengembalian.id_buku 
                                             INNER JOIN tb_petugas ON tb_pengembalian.id_petugas = tb_petugas.id 
                                             INNER JOIN tb_anggota ON tb_pengembalian.id_anggota = tb_anggota.id 
                                             ORDER BY tb_pengembalian.id DESC";
@@ -108,22 +106,25 @@
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
                                             <td><?= $data['judul'] ?></td>
-                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_pinjam']) ) ?></td>
-                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_kembali']) ) ?></td>
-                                            <td><?= $data['denda'] ?></td>
+                                            <td><?= date("l, d-F-Y", strtotime($data['tanggal_pengembalian']) ) ?></td>
+                                            
                                             <td><?= $data['namaanggota'] ?></td>
                                             <td><?= $data['namapetugas'] ?></td>
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <a href="detail.php?pengembalian=<?= $data['id'] ?>" class="btn btn-success waves-effect waves-light" data-toggle="tooltip" title="Lihat data <?= $data['id'] ?>">
-                                                            <i class="mdi mdi-account-card-details"></i></a>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <a href="hapus.php?pengembalian=<?= $data['id'] ?>" onclick="return confirm('Yakin Hapus Data?')" class="btn btn-danger waves-effect waves-light" data-toggle="tooltip" title="Hapus data <?= $data['id'] ?>">
-                                                            <i class="mdi mdi-delete-forever"></i></a>
-                                                    </div>
-                                                </div>
+                                                <?php if($data['denda']<=0):?>
+                                                    <h5>
+                                                        <span class="badge badge-success">Tidak Didenda</span>
+                                                    </h5> 
+                                                <?php elseif ($data['denda']>0) : ?>
+                                                    <h5>
+                                                        <span class="badge badge-danger">Denda Rp.<?=$data['denda']?></span>
+                                                    </h5>   
+                                                <?php endif; ?> 
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    <span class="badge badge-success">Dikembalikan</span>
+                                                </h5> 
                                             </td>
                                         </tr>
                                         <?php
