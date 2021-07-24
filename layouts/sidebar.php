@@ -60,7 +60,7 @@
 
                 <li class="menu-title">Pengaturan</li>
                 <li>
-                    <a href="<?= BASEPATH?>profile" class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
+                    <a href="<?= BASEPATH?>views/profile" class="waves-effect <?= $title == 'Profile' ? 'active' : ''; ?>"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
                 </li>
                 <li>
                     <a href="<?= BASEPATH?>logout.php" class="waves-effect"><i class="mdi mdi-logout"></i><span> Logout </span></a>

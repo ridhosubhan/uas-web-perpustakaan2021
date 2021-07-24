@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h3 class="text-center mt-0 m-b-15">
+                    <h3 class="text-center mt-0">
                         <a href="" class="logo logo-admin"><i class="mdi mdi-book-open-page-variant"></i> Perpustakaan</a>
                     </h3>
 
@@ -109,13 +109,10 @@
                     }
                     ?>
                         <form class="form-horizontal" name="formtambah" id="formtambah" method="post" class="form-group" enctype="multipart/form-data">
-
+                            <input name="_anggota" id="_anggota" value="<?=idanggota();?>" type="hidden" class="form-control" placeholder="ID Anggota" required readonly>
+                        
                             <div class="form-group">
-                                <input name="_anggota" id="_anggota" value="<?=idanggota();?>" type="hidden" class="form-control" placeholder="ID Anggota" required readonly>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Username <?=idanggota()?></label> 
+                                <label>Username</label> 
                                 <input class="form-control" name="_username" id="_username" type="text" placeholder="Username" required>
                             </div>
 
@@ -163,13 +160,13 @@
 
                             <div class="form-group text-center row m-t-20">
                                 <div class="col-12">
-                                    <button class="btn btn-danger btn-block waves-effect waves-light" value="simpan" name="simpan" id="simpan" type="submit">Register</button>
+                                    <button class="btn btn-primary btn-block waves-effect waves-light" value="simpan" name="simpan" id="simpan" type="submit">Register</button>
                                 </div>
                             </div>
 
                             <div class="form-group m-t-10 mb-0 row">
-                                <div class="col-12 m-t-20 text-center">
-                                    <a href="login.php" class="text-muted">Already have account?</a>
+                                <div class="col-12 m-t-20 text-right">
+                                    <a href="login.php" class="text-muted">Sudah punya akun?</a>
                                 </div>
                             </div>
                         </form>
