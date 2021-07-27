@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2021 at 03:51 PM
+-- Generation Time: Jul 27, 2021 at 07:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -74,8 +74,8 @@ INSERT INTO `tb_buku` (`id`, `kode_buku`, `judul`, `sampul`, `penulis`, `penerbi
 (4, 'BKU-0004', 'The Godfather', '9786020339245_sang-godfather-_the-godfather_-cover-baru.jpg', 'Mario Puzzo', ' Gramedia Widiasarana Indonesia', '2017', 90, 1),
 (5, 'BKU-0005', 'Al Quran Dan Sains', 'img20200929_14561196.jpg', 'Dr. H. Ridwan Abdullah Sani, M.Si.', 'Amzah', '2020', 666, 3),
 (6, 'BKU-0006', 'Agar Suami Tak Mendua', 'ID_SM2019MTH07SM.jpg', 'Muyassaroh, Muyassaroh', 'Elex Media Komputindo', '2019', 9, 3),
-(7, 'BKU-0007', 'Selena', '9786020639512_selena_cov.jpg', 'Tere Liye', 'Gramedia Pustaka Utama', '2016', 99, 1),
-(8, 'BKU-0008', 'Bicara Itu Ada Seninya', '9786024553920.jpg', 'Oh Su Hyang', ' Bhuana Ilmu Populer', '2019', 100, 2),
+(7, 'BKU-0007', 'Selena', '9786020639512_selena_cov.jpg', 'Tere Liye', 'Gramedia Pustaka Utama', '2016', 102, 1),
+(8, 'BKU-0008', 'Bicara Itu Ada Seninya', '9786024553920.jpg', 'Oh Su Hyang', ' Bhuana Ilmu Populer', '2019', 103, 2),
 (9, 'BKU-0009', 'Duduk Perkara Poligami', 'ID_SIS2015MTH05IDTMN_S.jpg', 'Murthada Muntahri', ' Serambi Ilmu Semesta', '2015', 80, 1),
 (10, 'BKU-0010', 'Kejahatan Terorganisasi (Organized Crime) Akar Dan Perkembangannya', '9786024220204_kejahatan_terorganisasi_organized_crime_akar_dan_perkembangannya.jpeg', 'Jay S. Albanese', 'Kencana Prenada Media', '2016', 190, 2);
 
@@ -91,15 +91,23 @@ CREATE TABLE `tb_peminjaman` (
   `tanggal_kembali` date NOT NULL,
   `id_buku` int(11) NOT NULL,
   `id_anggota` int(11) NOT NULL,
-  `id_petugas` int(11) NOT NULL
+  `id_petugas` int(11) NOT NULL,
+  `status_kembali` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_peminjaman`
 --
 
-INSERT INTO `tb_peminjaman` (`id`, `tanggal_pinjam`, `tanggal_kembali`, `id_buku`, `id_anggota`, `id_petugas`) VALUES
-(2, '2021-07-23', '2021-07-30', 10, 2, 1);
+INSERT INTO `tb_peminjaman` (`id`, `tanggal_pinjam`, `tanggal_kembali`, `id_buku`, `id_anggota`, `id_petugas`, `status_kembali`) VALUES
+(2, '2021-07-23', '2021-07-30', 10, 2, 1, 1),
+(3, '2021-07-27', '2021-08-03', 10, 1, 1, 1),
+(4, '2021-07-27', '2021-08-03', 7, 2, 1, 1),
+(5, '2021-07-27', '2021-08-03', 8, 2, 1, 1),
+(6, '2021-07-27', '2021-08-03', 6, 2, 1, 1),
+(7, '2021-07-27', '2021-08-03', 2, 2, 1, 1),
+(8, '2021-07-27', '2021-08-03', 9, 2, 1, 1),
+(9, '2021-07-27', '2021-08-03', 9, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +130,13 @@ CREATE TABLE `tb_pengembalian` (
 
 INSERT INTO `tb_pengembalian` (`id`, `tanggal_pengembalian`, `denda`, `id_buku`, `id_anggota`, `id_petugas`) VALUES
 (1, '2021-08-27', 200000, 10, 2, 1),
-(2, '2021-07-24', 0, 10, 2, 1);
+(2, '2021-07-24', 0, 10, 2, 1),
+(3, '2021-08-07', 10000, 10, 1, 1),
+(10, '2021-07-31', 0, 7, 2, 1),
+(11, '2021-07-16', 0, 8, 2, 1),
+(12, '2021-08-07', 90000, 6, 2, 1),
+(13, '2021-07-28', 0, 2, 2, 1),
+(15, '2021-07-28', 0, 9, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -186,8 +200,8 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `role`, `relasi`) VALUES
-(1, 'admin', '$2y$10$4K8xPmGWNFk6jmomVwnPWeyT2uL5Mi.uqQn0haSnAES71nIT0kqKe', 'Admin', 1),
-(2, 'jon', '$2y$10$1UoAA.bLdhZuNP0RFYuru.7BApCTJa9kCLF9k84C7bOT1IIB/Uqr.', 'Anggota', 2);
+(1, 'admin', '$2y$10$/xMhYN1TzrxEJolWe8Exf..K.3/HYanNIH5.5pG8vEZm1PaRjh0vK', 'Admin', 1),
+(2, 'jon', '$2y$10$WLRgma2NDBmwOSMKt29cNe2JiR6JETx/rWKPosK6dokZ1rvmZH3/.', 'Anggota', 2);
 
 --
 -- Indexes for dumped tables
@@ -260,19 +274,19 @@ ALTER TABLE `tb_anggota`
 -- AUTO_INCREMENT for table `tb_buku`
 --
 ALTER TABLE `tb_buku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_peminjaman`
 --
 ALTER TABLE `tb_peminjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_pengembalian`
 --
 ALTER TABLE `tb_pengembalian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_petugas`

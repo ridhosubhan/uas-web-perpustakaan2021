@@ -140,7 +140,7 @@
                                         <div class="dropdown-item noti-title">
                                             <h5><?= $_SESSION['isRole']=='Anggota' ? $profile_anggota['nama']: $profile_petugas['nama']; ?></h5>
                                         </div>
-                                        <a class="dropdown-item" href="<?= BASEPATH?>profile"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                                        <a class="dropdown-item" href="<?= BASEPATH?>views/profile"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                                         <a class="dropdown-item" href="<?= BASEPATH?>setting"><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?= BASEPATH?>logout.php"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>

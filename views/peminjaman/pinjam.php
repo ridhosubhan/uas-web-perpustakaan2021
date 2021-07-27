@@ -21,7 +21,7 @@
             $tanggal_pinjam = date('Y-m-d', time());
             $tanggal_kembali = date('Y-m-d', strtotime("+7 day", time()));
             $idanggota = $profile_anggota['id'];
-            $queri = "INSERT INTO `tb_peminjaman` (`tanggal_pinjam`, `tanggal_kembali`, `id_buku`, `id_anggota`) VALUES ('$tanggal_pinjam', '$tanggal_kembali', '$kodebuku','$idanggota')";
+            $queri = "INSERT INTO `tb_peminjaman` (`tanggal_pinjam`, `tanggal_kembali`, `id_buku`, `id_anggota`, `status_kembali`) VALUES ('$tanggal_pinjam', '$tanggal_kembali', '$kodebuku','$idanggota', '0')";
             $result = execute_query($con, $queri);
             if (mysqli_affected_rows($con) !=0){
                 $_SESSION["suksestambah"] = "Berhasil Memproses Data";

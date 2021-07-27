@@ -44,7 +44,7 @@
                                             <select class="form-control select2" name="_id_peminjam" id="_id_peminjam" required>
                                                 <option value="" disabled selected>Pilih Judul Buku</option>
                                                 <?php
-                                                    $query = "SELECT tb_peminjaman.id as id_peminjaman, tb_peminjaman.*, tb_buku.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id";
+                                                    $query = "SELECT tb_peminjaman.id as id_peminjaman, tb_peminjaman.*, tb_buku.* FROM tb_peminjaman INNER JOIN tb_buku ON tb_peminjaman.id_buku=tb_buku.id WHERE tb_peminjaman.status_kembali=0";
                                                     $result = execute_query($con, $query);
                                                     while($id_buku = mysqli_fetch_array($result)) {
                                                 ?>

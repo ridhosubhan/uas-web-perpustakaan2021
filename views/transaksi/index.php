@@ -60,6 +60,7 @@
                                                 $queri = "SELECT * FROM tb_pengembalian WHERE id_anggota='$idanggota'";
                                                 $results = execute_query($conn, $queri);
                                                 while($data_pinjam = mysqli_fetch_array($results)){
+                                                }
                                         ?>
                                         <tr>
                                             <td class="text-center"><b><?= $no."." ?></b></td>
@@ -88,8 +89,8 @@
                                             </td>
                                         </tr>
                                         <?php
+                                                
                                                 $no++;
-                                                }
                                             }
                                         ?>
                                         </tbody>
